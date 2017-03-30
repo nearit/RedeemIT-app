@@ -1,14 +1,15 @@
 import React from 'react'
 import { Text, TouchableOpacity } from 'react-native'
 
-const RoundedButton = ({ style, onPress, children }) => {
-  const { buttonStyle, textStyle } = styles
+const RoundedButton = ({style, textStyle, onPress, children}) => {
+  const {buttonStyle, textLabelStyle} = styles
 
-  const btnStyle = { ...buttonStyle, ...style }
+  const btnStyle = {...buttonStyle, ...style}
+  const txtStyle = {...textLabelStyle, ...textStyle}
 
   return (
     <TouchableOpacity onPress={onPress} style={btnStyle}>
-      <Text style={textStyle}>
+      <Text style={txtStyle}>
         {children}
       </Text>
     </TouchableOpacity>
@@ -16,7 +17,7 @@ const RoundedButton = ({ style, onPress, children }) => {
 }
 
 const styles = {
-  textStyle: {
+  textLabelStyle: {
     color: '#FFF',
     fontSize: 18,
     fontWeight: 'bold'
