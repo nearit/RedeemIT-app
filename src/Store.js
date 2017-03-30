@@ -2,4 +2,12 @@ import { createStore, applyMiddleware } from 'redux'
 import ReduxThunk from 'redux-thunk'
 import reducers from './reducers'
 
-export default Store = createStore(reducers, {}, applyMiddleware(ReduxThunk))
+const middlewares = [ReduxThunk]
+
+if (__DEV__) {
+  const {logger} = require('redux-logger')
+
+  middlewares.push(logger)
+}
+
+export default Store = createStore(reducers, {}, applyMiddleware(...middlewares))

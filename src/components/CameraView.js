@@ -3,7 +3,7 @@ import { View, Text, Image } from 'react-native'
 import Camera from 'react-native-camera'
 import { connect } from 'react-redux'
 import { BorderView, Button, CardSection, Spacer } from './common'
-import { logoutUser } from '../actions'
+import { logoutUser, couponDetected } from '../actions'
 
 class CameraView extends Component {
 
@@ -11,8 +11,12 @@ class CameraView extends Component {
     this.props.logoutUser()
   }
 
-  onBarCodeRead (event) {
-    console.log(event)
+  onBarCodeRead ({data}) {
+    const {loading, couponDetected} = this.props
+
+    if (!loading) {
+      couponDetected(data)
+    }
   }
 
   render () {
@@ -41,6 +45,7 @@ class CameraView extends Component {
 
         <CardSection style={ViewFinderContainerStyle}>
           <BorderView style={ViewFinderStyle}/>
+          <Button onPress={() => this.onBarCodeRead({data: '8A6305FD7A87'})}><Text>Test</Text></Button>
         </CardSection>
 
         <CardSection style={LogoutButtonContainerStyle}>
@@ -121,4 +126,12 @@ const styles = {
   }
 }
 
-export default connect(null, {logoutUser})(CameraView)
+const mapStateToProps = ({coupon}) => {
+  const {loading} = coupon
+
+  return {
+    loading
+  }
+}
+
+export default connect(mapStateToProps, {logoutUser, couponDetected})(CameraView)

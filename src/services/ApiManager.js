@@ -28,9 +28,13 @@ export const readResource = (url, {params} = {}) => {
     {
       params,
       transformResponse: [function (response) {
-        // Do whatever you want to transform the data
-        const {data, included} = JSON.parse(response)
-        return JsonApiUtils.toJsonModel(data, {includedData: included})
+        // If data cannot be parsed return original response
+        try {
+          const {data, included} = JSON.parse(response)
+          return JsonApiUtils.toJsonModel(data, {includedData: included})
+        } catch (err) {
+          return response
+        }
       }]
     }
   )
