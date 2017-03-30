@@ -15,7 +15,7 @@ export default (state = INITIAL_STATE, action) => {
     case COUPON_DETECTED:
       return {...state, serialCode: action.payload, loading: true}
     case COUPON_DETECTED_FAILED:
-      return {...state, ...INITIAL_STATE, couponStatus: 'INVALID'}
+      return {...state, ...INITIAL_STATE, couponStatus: 'CODICE COUPON NON VALIDO'}
     default:
       return state
   }
