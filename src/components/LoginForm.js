@@ -57,7 +57,7 @@ class LoginForm extends Component {
               <Image
                 source={require('../assets/lock.png')}
                 style={iconStyle}
-            />
+              />
             </CardSection>
 
             <CardSection>

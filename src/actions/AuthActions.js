@@ -1,3 +1,4 @@
+import { Actions } from 'react-native-router-flux'
 import jwt_decode from 'jwt-decode'
 import { createResource } from '../services'
 
@@ -27,12 +28,17 @@ export const loginUser = ({email, password}) => {
     dispatch({type: AUTH_LOGIN})
 
     createResource('/auth', {email, password})
-      .then(({data}) => {
-        const {token} = data.data.attributes
-        dispatch({type: AUTH_LOGIN_SUCCESS, payload: token})
+      .then((data) => {
+        onLoginSuccess(dispatch, data)
       })
       .catch((err) => {
         dispatch({type: AUTH_LOGIN_FAILED})
       })
   }
+}
+
+const onLoginSuccess = (dispatch, {data}) => {
+  const {token} = data.data.attributes
+  dispatch({type: AUTH_LOGIN_SUCCESS, payload: token})
+  Actions.main()
 }
