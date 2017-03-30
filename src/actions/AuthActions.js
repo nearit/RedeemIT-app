@@ -9,6 +9,8 @@ export const AUTH_LOGIN = 'auth_login'
 export const AUTH_LOGIN_SUCCESS = 'auth_login_success'
 export const AUTH_LOGIN_FAILED = 'auth_login_failed'
 
+export const AUTH_LOGOUT = 'auth_login'
+
 export const emailChanged = (email) => {
   return {
     type: AUTH_EMAIL_CHANGED,
@@ -41,4 +43,11 @@ const onLoginSuccess = (dispatch, {data}) => {
   const {token} = data.data.attributes
   dispatch({type: AUTH_LOGIN_SUCCESS, payload: token})
   Actions.main()
+}
+
+export const logoutUser = () => {
+  return (dispatch) => {
+    dispatch({type: AUTH_LOGOUT})
+    Actions.auth()
+  }
 }

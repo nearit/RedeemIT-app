@@ -71,6 +71,7 @@ class LoginForm extends Component {
                 value={email}
                 onChangeText={this.props.emailChanged}
                 autoCorrect={false}
+                keyboardType='email-address'
           />
             </CardSection>
 

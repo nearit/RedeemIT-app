@@ -1,9 +1,19 @@
 import React, { Component } from 'react'
 import { View, Text, Image } from 'react-native'
+import Camera from 'react-native-camera'
 import { connect } from 'react-redux'
-import { BorderView, Button, Card, CardSection, MaterialInput, LinkText, RoundedButton, Spacer } from './common'
+import { BorderView, Button, CardSection, Spacer } from './common'
+import { logoutUser } from '../actions'
 
 class CameraView extends Component {
+
+  onLogoutPress () {
+    this.props.logoutUser()
+  }
+
+  onBarCodeRead (event) {
+    console.log(event)
+  }
 
   render () {
     const {
@@ -20,9 +30,10 @@ class CameraView extends Component {
     } = styles
 
     return (
-      <Image
-        source={require('../assets/background.png')}
-        style={PageStyle}>
+      <Camera
+        style={PageStyle}
+        aspect={Camera.constants.Aspect.fill}
+        onBarCodeRead={(event) => this.onBarCodeRead(event)}>
 
         <CardSection style={HintContainerStyle}>
           <Text style={HintStyle}>Inquadra il QR code con la fotocamera</Text>
@@ -34,7 +45,10 @@ class CameraView extends Component {
 
         <CardSection style={LogoutButtonContainerStyle}>
           <View style={LogoutButtonWrapperStyle}>
-            <Button style={LogoutButtonStyle}>
+            <Button
+              onPress={this.onLogoutPress.bind(this)}
+              style={LogoutButtonStyle}
+            >
               <View style={LogoutButtonIconStyle}>
                 <Image source={require('../assets/unlock.png')}/>
               </View>
@@ -45,7 +59,7 @@ class CameraView extends Component {
             </Button>
           </View>
         </CardSection>
-      </Image>
+      </Camera>
     )
   }
 
@@ -107,4 +121,4 @@ const styles = {
   }
 }
 
-export default connect(null, null)(CameraView)
+export default connect(null, {logoutUser})(CameraView)
