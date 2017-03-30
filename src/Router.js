@@ -5,7 +5,7 @@ import CameraView from './components/CameraView'
 
 const RouterComponent = () => {
   return (
-    <Router hideNavBar>
+    <Router hideNavBar panHandlers={null}>
       <Scene key='auth'>
         <Scene
           key='login'
