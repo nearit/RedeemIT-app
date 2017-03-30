@@ -1,16 +1,12 @@
 import React from 'react'
 import { Provider } from 'react-redux'
-import { createStore, applyMiddleware } from 'redux'
-import ReduxThunk from 'redux-thunk'
-import reducers from './reducers'
-import LoginForm from './components/LoginForm'
+import Store from './Store'
+import Router from './Router'
 
 const App = () => {
-  const store = createStore(reducers, {}, applyMiddleware(ReduxThunk))
-
   return (
-    <Provider store={store}>
-      <LoginForm />
+    <Provider store={Store}>
+      <Router />
     </Provider>
   )
 }

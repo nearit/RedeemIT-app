@@ -15,21 +15,23 @@ const INITIAL_STATE = {
 }
 
 export default (state = INITIAL_STATE, action) => {
+  //console.log('state', state, 'action', action)
+
   switch (action.type) {
     case AUTH_EMAIL_CHANGED:
-      return { ...state, email: action.payload }
+      return {...state, email: action.payload}
 
     case AUTH_PASSWORD_CHANGED:
-      return { ...state, password: action.payload }
+      return {...state, password: action.payload}
 
     case AUTH_LOGIN:
-      return { ...state, loading: true, error: '' }
+      return {...state, loading: true, error: ''}
 
     case AUTH_LOGIN_SUCCESS:
-      return { ...state, ...INITIAL_STATE, token: action.payload }
+      return {...state, ...INITIAL_STATE, token: action.payload}
 
     case AUTH_LOGIN_FAILED:
-      return { ...state, password: '', loading: false, error: 'Errore di autenticazione.' }
+      return {...state, password: '', loading: false, error: 'Errore di autenticazione.'}
 
     default:
       return state

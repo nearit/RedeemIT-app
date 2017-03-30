@@ -1,3 +1,6 @@
+import jwt_decode from 'jwt-decode'
+import { createResource } from '../services'
+
 export const AUTH_EMAIL_CHANGED = 'auth_email_changed'
 export const AUTH_PASSWORD_CHANGED = 'auth_password_changed'
 
@@ -19,16 +22,17 @@ export const passwordChanged = (password) => {
   }
 }
 
-export const loginUser = ({ email, password }) => {
+export const loginUser = ({email, password}) => {
   return (dispatch) => {
-    dispatch({ type: AUTH_LOGIN })
+    dispatch({type: AUTH_LOGIN})
 
-    Promise.resolve({user: 'ada-ada'})
-      .then(user => {
-        dispatch({ type: AUTH_LOGIN_SUCCESS, payload: user })
+    createResource('/auth', {email, password})
+      .then(({data}) => {
+        const {token} = data.data.attributes
+        dispatch({type: AUTH_LOGIN_SUCCESS, payload: token})
       })
-      .catch(() => {
-        dispatch({ type: AUTH_LOGIN_FAILED })
+      .catch((err) => {
+        dispatch({type: AUTH_LOGIN_FAILED})
       })
   }
 }
