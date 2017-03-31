@@ -19,6 +19,18 @@ const renderValidityPeriod = ({redeemable_from, expires_at}) => {
   )
 }
 
+const renderCouponStatus = (coupon) => {
+  return (
+    <Text>Test</Text>
+  )
+}
+
+const renderActionsButtons = ({onOkPress, onCancelPress}) => {
+  return (
+    <RoundedButton onPress={onCancelPress}>Test</RoundedButton>
+  )
+}
+
 const CouponDetailsCard = (props) => {
   const {coupon} = props
   const {
@@ -63,7 +75,11 @@ const CouponDetailsCard = (props) => {
       </CardSection>
 
       <CardSection>
-        <Text>{coupon.value}</Text>
+        {renderCouponStatus(coupon)}
+      </CardSection>
+
+      <CardSection>
+        {renderActionsButtons(props)}
       </CardSection>
 
     </Card>

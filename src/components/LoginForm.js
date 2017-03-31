@@ -21,13 +21,13 @@ class LoginForm extends Component {
   }
 
   onLoginPress () {
-    const { email, password } = this.props
+    const {email, password} = this.props
 
     // Release focus from fields
     this.emailField.blur()
     this.passwordField.blur()
 
-    this.props.loginUser({ email, password })
+    this.props.loginUser({email, password})
   }
 
   render () {
@@ -50,7 +50,7 @@ class LoginForm extends Component {
         source={require('../assets/background.png')}
         style={pageStyle}>
 
-        <KeyboardAvoidingView behavior='padding'>
+        <KeyboardAvoidingView behavior='position'>
           <Card style={loginFormStyle}>
 
             <CardSection style={iconContainerStyle}>
@@ -72,7 +72,7 @@ class LoginForm extends Component {
                 onChangeText={this.props.emailChanged}
                 autoCorrect={false}
                 keyboardType='email-address'
-          />
+              />
             </CardSection>
 
             <CardSection>
@@ -86,7 +86,7 @@ class LoginForm extends Component {
                 value={password}
                 onChangeText={this.props.passwordChanged}
                 secureTextEntry
-          />
+              />
             </CardSection>
 
             <CardSection style={linkContainerStyle}>
@@ -95,8 +95,8 @@ class LoginForm extends Component {
 
             <CardSection style={buttonContainerStyle}>
               <RoundedButton onPress={this.onLoginPress.bind(this)}>
-              OK
-            </RoundedButton>
+                OK
+              </RoundedButton>
             </CardSection>
           </Card>
         </KeyboardAvoidingView>
@@ -114,9 +114,8 @@ const styles = {
     height: undefined,
     backgroundColor: 'transparent',
     flexDirection: 'column',
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-    paddingBottom: 70
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   loginFormStyle: {
     width: 300,
@@ -142,10 +141,10 @@ const styles = {
   }
 }
 
-const mapStateToProps = ({ auth }) => {
-  const { email, password } = auth
+const mapStateToProps = ({auth}) => {
+  const {email, password} = auth
 
-  return { email, password }
+  return {email, password}
 }
 
 const mapActionsToProps = {

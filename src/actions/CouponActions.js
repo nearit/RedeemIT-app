@@ -1,9 +1,11 @@
-import { Actions } from 'react-native-router-flux'
+import { Actions, ActionConst } from 'react-native-router-flux'
 import { readResource } from '../services'
 
 export const COUPON_DETECTED = 'coupon_detected'
 export const COUPON_DETECTED_SUCCESS = 'coupon_detected_success'
 export const COUPON_DETECTED_FAILED = 'coupon_detected_failed'
+
+export const COUPON_RESET = 'coupon_reset'
 
 export const couponDetected = (couponSerial) => {
   return (dispatch) => {
@@ -21,5 +23,14 @@ export const couponDetected = (couponSerial) => {
         Actions.result()
       })
 
+  }
+}
+
+export const couponReset = () => {
+  return (dispatch) => {
+    // Go back to camera
+    Actions.camera({type: ActionConst.BACK})
+    // Reset state
+    dispatch({type: COUPON_RESET})
   }
 }

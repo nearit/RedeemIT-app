@@ -1,14 +1,15 @@
 import {
   COUPON_DETECTED,
   COUPON_DETECTED_SUCCESS,
-  COUPON_DETECTED_FAILED
+  COUPON_DETECTED_FAILED,
+  COUPON_RESET
 } from '../actions'
 
 const INITIAL_STATE = {
   serialCode: '',
   loading: false,
   error: false,
-  couponDetails: null,
+  couponDetails: {},
   redeemStatus: null
 }
 
@@ -22,6 +23,10 @@ export default (state = INITIAL_STATE, action) => {
 
     case COUPON_DETECTED_FAILED:
       return {...state, ...INITIAL_STATE, error: true, redeemStatus: 'CODICE COUPON NON VALIDO'}
+
+    case COUPON_RESET:
+      return {...INITIAL_STATE}
+
     default:
       return state
   }

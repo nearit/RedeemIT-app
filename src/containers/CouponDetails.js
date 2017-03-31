@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { View, Image, Text } from 'react-native'
 import { connect } from 'react-redux'
 import { Actions } from 'react-native-router-flux'
+import { couponReset } from '../actions'
 import { Card, CardSection } from '../components/common'
 import CouponDetailsCard from '../components/CouponDetailsCard'
 
@@ -12,7 +13,9 @@ class CouponDetails extends Component {
   }
 
   onCancelButtonPressed () {
-    Actions.pop()
+    const {couponReset} = this.props
+
+    couponReset()
   }
 
   render () {
@@ -28,7 +31,10 @@ class CouponDetails extends Component {
         style={pageStyle}
       >
         <View style={overlayStyle}>
-          <CouponDetailsCard coupon={couponDetails}/>
+          <CouponDetailsCard
+            coupon={couponDetails}
+            onCancelPress={this.onCancelButtonPressed.bind(this)}
+          />
         </View>
       </Image>
     )
@@ -88,4 +94,4 @@ const mapStateToProps = ({coupon}) => {
   return {error, couponDetails, redeemStatus}
 }
 
-export default connect(mapStateToProps, null)(CouponDetails)
+export default connect(mapStateToProps, {couponReset})(CouponDetails)

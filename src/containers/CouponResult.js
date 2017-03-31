@@ -1,17 +1,21 @@
 import React, { Component } from 'react'
 import { View, Image, Text } from 'react-native'
 import { connect } from 'react-redux'
-import { Actions } from 'react-native-router-flux'
 import { BorderView, CardSection, RoundedButton } from '../components/common'
+import { couponReset } from '../actions'
 
 class CouponResult extends Component {
 
   onRetryButtonPressed () {
-    Actions.pop()
+    const {couponReset} = this.props
+
+    couponReset()
   }
 
   onOkButtonPressed () {
-    Actions.camera()
+    const {couponReset} = this.props
+
+    couponReset()
   }
 
   renderCouponStatusIcon () {
@@ -152,4 +156,4 @@ const mapStateToProps = ({coupon}) => {
   return {error, redeemStatus}
 }
 
-export default connect(mapStateToProps, null)(CouponResult)
+export default connect(mapStateToProps, {couponReset})(CouponResult)
