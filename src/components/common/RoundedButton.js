@@ -4,12 +4,9 @@ import { Text, TouchableOpacity } from 'react-native'
 const RoundedButton = ({style, textStyle, onPress, children}) => {
   const {buttonStyle, textLabelStyle} = styles
 
-  const btnStyle = {...buttonStyle, ...style}
-  const txtStyle = {...textLabelStyle, ...textStyle}
-
   return (
-    <TouchableOpacity onPress={onPress} style={btnStyle}>
-      <Text style={txtStyle}>
+    <TouchableOpacity onPress={onPress} style={[buttonStyle, style]}>
+      <Text style={[textLabelStyle, textStyle]}>
         {children}
       </Text>
     </TouchableOpacity>

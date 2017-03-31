@@ -2,6 +2,7 @@ import React from 'react'
 import { Scene, Router } from 'react-native-router-flux'
 import LoginForm from './components/LoginForm'
 import CameraView from './components/CameraView'
+import CouponDetails from './containers/CouponDetails'
 import CouponResult from './containers/CouponResult'
 
 const RouterComponent = () => {
@@ -20,6 +21,11 @@ const RouterComponent = () => {
           key='camera'
           component={CameraView}
           initial
+        />
+
+        <Scene
+          key='details'
+          component={CouponDetails}
         />
 
         <Scene

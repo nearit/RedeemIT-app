@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { Actions } from 'react-native-router-flux'
 import { BorderView, CardSection, RoundedButton } from '../components/common'
 
-class CouponResult extends Component {
+class CouponDetails extends Component {
 
   onRetryButtonPressed () {
     Actions.pop()
@@ -152,4 +152,4 @@ const mapStateToProps = ({coupon}) => {
   return {error, redeemStatus}
 }
 
-export default connect(mapStateToProps, null)(CouponResult)
+export default connect(mapStateToProps, null)(CouponDetails)

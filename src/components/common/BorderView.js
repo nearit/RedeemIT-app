@@ -3,7 +3,7 @@ import { View } from 'react-native'
 
 const BorderView = (props) => {
   return (
-    <View style={{...styles.BorderStyle, ...props.style}}>
+    <View style={[styles.BorderStyle, props.style]}>
       {props.children}
     </View>
   )
