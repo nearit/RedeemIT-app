@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { View, Text, Image } from 'react-native'
 import Camera from 'react-native-camera'
 import { connect } from 'react-redux'
-import { BorderView, Button, CardSection, Spacer } from './common'
+import { BorderView, Button, CardSection, Spacer, FooterButton } from './common'
 import { logoutUser, couponDetected } from '../actions'
 
 class CameraView extends Component {
@@ -25,12 +25,7 @@ class CameraView extends Component {
       HintContainerStyle,
       HintStyle,
       ViewFinderContainerStyle,
-      ViewFinderStyle,
-      LogoutButtonContainerStyle,
-      LogoutButtonWrapperStyle,
-      LogoutButtonStyle,
-      LogoutButtonIconStyle,
-      LogoutButtonLabelStyle
+      ViewFinderStyle
     } = styles
 
     return (
@@ -48,22 +43,11 @@ class CameraView extends Component {
           <Button onPress={() => this.onBarCodeRead({data: '8A6305FD7A87'})}><Text>Test</Text></Button>
         </CardSection>
 
-        <CardSection style={LogoutButtonContainerStyle}>
-          <View style={LogoutButtonWrapperStyle}>
-            <Button
-              onPress={this.onLogoutPress.bind(this)}
-              style={LogoutButtonStyle}
-            >
-              <View style={LogoutButtonIconStyle}>
-                <Image source={require('../assets/unlock.png')}/>
-              </View>
-
-              <Text style={LogoutButtonLabelStyle}>Logout</Text>
-
-              <Spacer />
-            </Button>
-          </View>
-        </CardSection>
+        <FooterButton
+          onPress={this.onLogoutPress.bind(this)}
+          label='Logout'
+          icon={require('../assets/unlock.png')}
+        />
       </Camera>
     )
   }
@@ -99,30 +83,6 @@ const styles = {
     alignSelf: 'center',
     width: 300,
     height: 300
-  },
-  LogoutButtonContainerStyle: {
-    flex: 1
-  },
-  LogoutButtonWrapperStyle: {
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'flex-end'
-  },
-  LogoutButtonStyle: {
-    height: 70,
-    backgroundColor: 'white',
-    justifyContent: 'space-around'
-  },
-  LogoutButtonIconStyle: {
-    flex: 1,
-    alignItems: 'flex-end'
-  },
-  LogoutButtonLabelStyle: {
-    flex: 1,
-    color: '#9f92ff',
-    fontSize: 16,
-    fontStyle: 'italic',
-    textAlign: 'center'
   }
 }
 

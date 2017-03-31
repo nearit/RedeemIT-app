@@ -2,17 +2,15 @@ import React from 'react'
 import { View } from 'react-native'
 
 const CardSection = (props) => {
-  const containerStyle = {...styles.container, ...props.style}
-
   return (
-    <View style={containerStyle}>
+    <View style={[styles.containerStyle, props.style]}>
       {props.children}
     </View>
   )
 }
 
 const styles = {
-  container: {
+  containerStyle: {
     justifyContent: 'flex-start',
     flexDirection: 'row',
     position: 'relative'

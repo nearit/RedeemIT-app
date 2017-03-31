@@ -1,9 +1,13 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, Image } from 'react-native'
 import moment from 'moment'
-import { Card, CardSection, NrtImage, RoundedButton } from '../components/common'
+import { Card, CardSection, NrtImage } from '../components/common'
 
-const renderValidityPeriod = ({redeemable_from, expires_at}) => {
+const renderValidityPeriod = ({redeemable, expired, redeemable_from, expires_at}) => {
+  const {validitySectionStyle, validityErrorStyle} = styles
+
+  let textStyle = []
+
   let validity_period_text = ''
 
   if (redeemable_from) {
@@ -14,21 +18,87 @@ const renderValidityPeriod = ({redeemable_from, expires_at}) => {
     validity_period_text = validity_period_text + 'fino al ' + moment(expires_at).format('DD/MM/YYYY')
   }
 
+  if (!redeemable || expired) {
+    textStyle.push(validityErrorStyle)
+  }
+
   return (
-    <Text>{validity_period_text}</Text>
+    <View>
+      <CardSection style={validitySectionStyle}>
+        <Text style={textStyle}>Validità:</Text>
+      </CardSection>
+
+      <CardSection style={[validitySectionStyle, {paddingBottom: 25}]}>
+        <Text style={textStyle}>{validity_period_text}</Text>
+      </CardSection>
+
+      <CardSection>
+        <Image
+          source={require('../assets/trapezio-bottom.png')}
+        />
+      </CardSection>
+    </View>
   )
 }
 
-const renderCouponStatus = (coupon) => {
-  return (
-    <Text>Test</Text>
-  )
-}
+const renderCouponStatusSection = (coupon) => {
+  const {statusSectionStyle, statusTextStyle, successStatusTextStyle} = styles
+  const {expired, redeemed, redeemable} = coupon
 
-const renderActionsButtons = ({onOkPress, onCancelPress}) => {
+  if (redeemed) {
+    return (
+      <CardSection style={[statusSectionStyle, {backgroundColor: 'white'}]}>
+        <Text style={statusTextStyle}>COUPON GIA' UTILIZZATO</Text>
+      </CardSection>
+    )
+  }
+
+  if (!redeemable) {
+    return (
+      <View>
+        <CardSection>
+          <Image
+            source={require('../assets/trapezio-top.png')}
+          />
+        </CardSection>
+
+        <CardSection style={[statusSectionStyle, {backgroundColor: 'white'}]}>
+          <Text style={statusTextStyle}>COUPON NON ATTIVO</Text>
+        </CardSection>
+      </View>
+    )
+  }
+
+  if (expired) {
+    return (
+      <View>
+        <CardSection>
+          <Image
+            source={require('../assets/trapezio-top.png')}
+          />
+        </CardSection>
+
+        <CardSection style={statusSectionStyle}>
+          <Text style={statusTextStyle}>COUPON SCADUTO</Text>
+        </CardSection>
+      </View>
+    )
+  }
+
   return (
-    <RoundedButton onPress={onCancelPress}>Test</RoundedButton>
+    <View>
+      <CardSection>
+        <Image
+          source={require('../assets/trapezio-top.png')}
+        />
+      </CardSection>
+
+      <CardSection style={statusSectionStyle}>
+        <Text style={[statusTextStyle, successStatusTextStyle]}>CODICE COUPON VALIDO</Text>
+      </CardSection>
+    </View>
   )
+
 }
 
 const CouponDetailsCard = (props) => {
@@ -40,8 +110,7 @@ const CouponDetailsCard = (props) => {
     titleSectionStyle,
     titleStyle,
     valueSectionStyle,
-    valueStyle,
-    fillerSectionStyle
+    valueStyle
   } = styles
 
   return (
@@ -62,25 +131,9 @@ const CouponDetailsCard = (props) => {
         <Text style={valueStyle}>{coupon.value}</Text>
       </CardSection>
 
-      <CardSection>
-        <Text>Validità:</Text>
-      </CardSection>
+      {renderValidityPeriod(coupon)}
 
-      <CardSection>
-        {renderValidityPeriod(coupon)}
-      </CardSection>
-
-      <CardSection style={fillerSectionStyle}>
-        <Text>Filler goes here</Text>
-      </CardSection>
-
-      <CardSection>
-        {renderCouponStatus(coupon)}
-      </CardSection>
-
-      <CardSection>
-        {renderActionsButtons(props)}
-      </CardSection>
+      {renderCouponStatusSection(coupon)}
 
     </Card>
   )
@@ -89,10 +142,18 @@ const CouponDetailsCard = (props) => {
 const styles = {
   cardStyle: {
     width: 300,
-    backgroundColor: 'white',
+    borderWidth: 0,
+    paddingTop: 0,
+    paddingBottom: 0,
+    paddingLeft: 0,
+    paddingRight: 0
   },
   iconSectionStyle: {
-    justifyContent: 'center'
+    justifyContent: 'center',
+    backgroundColor: 'white',
+    borderTopRightRadius: 5,
+    borderTopLeftRadius: 5,
+    paddingTop: 30
   },
   iconStyle: {
     width: 100,
@@ -101,26 +162,50 @@ const styles = {
     borderColor: '#333333'
   },
   titleSectionStyle: {
-    marginTop: 25
+    paddingTop: 25,
+    paddingLeft: 25,
+    paddingRight: 25,
+    backgroundColor: 'white'
   },
   titleStyle: {
     fontSize: 20,
     fontWeight: 'bold'
   },
   valueSectionStyle: {
-    marginTop: 20,
-    marginBottom: 20
+    paddingTop: 20,
+    paddingBottom: 20,
+    paddingLeft: 25,
+    paddingRight: 25,
+    backgroundColor: 'white'
   },
   valueStyle: {
     fontSize: 18,
     fontWeight: 'bold'
   },
-  fillerSectionStyle: {
-    height: 20,
-    marginTop: 27,
-    marginBottom: 22,
+  validitySectionStyle: {
+    paddingLeft: 25,
+    paddingRight: 25,
+    backgroundColor: 'white'
+  },
+  validityErrorStyle: {
+    color: '#e91832'
+  },
+  statusSectionStyle: {
+    paddingTop: 20,
+    paddingBottom: 25,
+    borderBottomLeftRadius: 15,
+    borderBottomRightRadius: 15
+  },
+  statusTextStyle: {
+    flex: 1,
+    color: '#e91832',
+    fontSize: 18,
+    fontWeight: 'bold',
+    textAlign: 'center'
+  },
+  successStatusTextStyle: {
+    color: '#68c600'
   }
-
 }
 
 export default CouponDetailsCard

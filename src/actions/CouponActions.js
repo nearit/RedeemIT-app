@@ -14,7 +14,8 @@ export const couponDetected = (couponSerial) => {
     readResource('/plugins/coupon-blaster/claims/' + couponSerial, {params: {include: 'coupon'}})
       .then(({data}) => {
         const {coupon} = data.included
-        dispatch({type: COUPON_DETECTED_SUCCESS, payload: coupon})
+
+        dispatch({type: COUPON_DETECTED_SUCCESS, payload: {...coupon, ...data.meta}})
 
         Actions.details()
       })
@@ -29,7 +30,7 @@ export const couponDetected = (couponSerial) => {
 export const couponReset = () => {
   return (dispatch) => {
     // Go back to camera
-    Actions.camera({type: ActionConst.BACK})
+    Actions.camera()
     // Reset state
     dispatch({type: COUPON_RESET})
   }

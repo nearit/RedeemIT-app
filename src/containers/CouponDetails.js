@@ -3,7 +3,7 @@ import { View, Image, Text } from 'react-native'
 import { connect } from 'react-redux'
 import { Actions } from 'react-native-router-flux'
 import { couponReset } from '../actions'
-import { Card, CardSection } from '../components/common'
+import { Button, FooterButton, Spacer, Card, CardSection } from '../components/common'
 import CouponDetailsCard from '../components/CouponDetailsCard'
 
 class CouponDetails extends Component {
@@ -31,9 +31,18 @@ class CouponDetails extends Component {
         style={pageStyle}
       >
         <View style={overlayStyle}>
+          <Spacer />
+
           <CouponDetailsCard
             coupon={couponDetails}
             onCancelPress={this.onCancelButtonPressed.bind(this)}
+            style={{flex: 2, alignItems: 'center', justifyContent: 'center'}}
+          />
+
+          <FooterButton
+            onPress={this.onCancelButtonPressed.bind(this)}
+            label='Chiudi'
+            icon={require('../assets/close.png')}
           />
         </View>
       </Image>
