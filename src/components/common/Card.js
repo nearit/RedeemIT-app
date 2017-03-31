@@ -1,11 +1,9 @@
 import React from 'react'
 import { View } from 'react-native'
 
-const Card = ({ style, children }) => {
-  const mergedStyle = { ...styles.containerStyle, ...style }
-
+const Card = ({style, children}) => {
   return (
-    <View style={mergedStyle}>
+    <View style={[styles.containerStyle, style]}>
       {children}
     </View>
   )

@@ -9,7 +9,6 @@ export const couponDetected = (couponSerial) => {
   return (dispatch) => {
     dispatch({type: COUPON_DETECTED, payload: couponSerial})
 
-    // TODO Query coupon-blaster
     readResource('/plugins/coupon-blaster/claims/' + couponSerial, {params: {include: 'coupon'}})
       .then(({data}) => {
         const {coupon} = data.included

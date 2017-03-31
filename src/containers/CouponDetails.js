@@ -2,75 +2,25 @@ import React, { Component } from 'react'
 import { View, Image, Text } from 'react-native'
 import { connect } from 'react-redux'
 import { Actions } from 'react-native-router-flux'
-import { BorderView, CardSection, RoundedButton } from '../components/common'
+import { Card, CardSection } from '../components/common'
+import CouponDetailsCard from '../components/CouponDetailsCard'
 
 class CouponDetails extends Component {
 
-  onRetryButtonPressed () {
+  onRedeemButtonPressed () {
     Actions.pop()
   }
 
-  onOkButtonPressed () {
-    Actions.camera()
-  }
-
-  renderCouponStatusIcon () {
-    const {error} = this.props
-
-    if (error) {
-      return (
-        <Image
-          source={require('../assets/error.png')}
-        />
-      )
-    }
-
-    return (
-      <Image
-        source={require('../assets/success.png')}
-      />
-    )
-  }
-
-  renderActionButton () {
-    const {error} = this.props
-    const {actionButtonStyle, actionButtonLabelStyle} = styles
-
-    if (error) {
-      return (
-        <RoundedButton
-          style={actionButtonStyle}
-          textStyle={actionButtonLabelStyle}
-          onPress={this.onRetryButtonPressed.bind(this)}
-        >
-          RIPROVA
-        </RoundedButton>
-      )
-    }
-
-    return (
-      <RoundedButton
-        style={actionButtonStyle}
-        textStyle={actionButtonLabelStyle}
-        onPress={this.onOkButtonPressed.bind(this)}
-      >
-        OK
-      </RoundedButton>
-    )
+  onCancelButtonPressed () {
+    Actions.pop()
   }
 
   render () {
-    const {error, redeemStatus} = this.props
+    const {couponDetails} = this.props
     const {
       pageStyle,
-      overlayStyle,
-      baseResultContainerStyle,
-      errorResultContainerStyle,
-      successResultContainerStyle,
-      resultTextStyle
+      overlayStyle
     } = styles
-
-    const additionalResultContainerStyle = error ? errorResultContainerStyle : successResultContainerStyle
 
     return (
       <Image
@@ -78,21 +28,7 @@ class CouponDetails extends Component {
         style={pageStyle}
       >
         <View style={overlayStyle}>
-          <BorderView style={[baseResultContainerStyle, additionalResultContainerStyle]}>
-            <CardSection>
-              {this.renderCouponStatusIcon()}
-            </CardSection>
-
-            <CardSection>
-              <Text style={resultTextStyle}>
-                {redeemStatus}
-              </Text>
-            </CardSection>
-
-            <CardSection>
-              {this.renderActionButton()}
-            </CardSection>
-          </BorderView>
+          <CouponDetailsCard coupon={couponDetails}/>
         </View>
       </Image>
     )
@@ -147,9 +83,9 @@ const styles = {
 }
 
 const mapStateToProps = ({coupon}) => {
-  const {error, redeemStatus} = coupon
+  const {error, couponDetails, redeemStatus} = coupon
 
-  return {error, redeemStatus}
+  return {error, couponDetails, redeemStatus}
 }
 
 export default connect(mapStateToProps, null)(CouponDetails)
