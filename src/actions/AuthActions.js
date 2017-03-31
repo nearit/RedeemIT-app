@@ -1,5 +1,5 @@
 import { Actions } from 'react-native-router-flux'
-import jwt_decode from 'jwt-decode'
+import Snackbar from 'react-native-snackbar'
 import { createResource } from '../services'
 
 export const AUTH_EMAIL_CHANGED = 'auth_email_changed'
@@ -35,6 +35,12 @@ export const loginUser = ({email, password}) => {
       })
       .catch((err) => {
         dispatch({type: AUTH_LOGIN_FAILED})
+        // Notify user
+        Snackbar.show({
+          backgroundColor: '#e91832',
+          title: 'Login fallito, controlla le tue credenziali.',
+          duration: Snackbar.LENGTH_LONG,
+        })
       })
   }
 }
