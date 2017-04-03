@@ -45,14 +45,19 @@ export const loginUser = ({email, password}) => {
 const onLoginSuccess = (dispatch, {data}) => {
   const {token} = data.data.attributes
   dispatch({type: AUTH_LOGIN_SUCCESS, payload: token})
-    NavigationActions.navigate({routeName : 'Main'})
+    dispatch(NavigationActions.reset({
+        index : 0,
+        actions : [
+            NavigationActions.navigate( {routeName : 'Main'})
+        ]
+    }))
 }
 
 export const logoutUser = () => {
   return (dispatch) => {
     dispatch({type: AUTH_LOGOUT})
       dispatch({
-          type : 'Navigation/RESET',
+          type : 'Navigation/NAVIGATE',
           routeName : 'Auth'
       })
   }
