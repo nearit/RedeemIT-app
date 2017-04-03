@@ -2957,9 +2957,9 @@ react-native-router-flux@^3.38.0:
     react-native-tabs "^1.0.9"
     react-static-container "1.0.1"
 
-react-native-snackbar@^0.3.2:
-  version "0.3.2"
-  resolved "https://registry.yarnpkg.com/react-native-snackbar/-/react-native-snackbar-0.3.2.tgz#abc9bd69adc5d5540065b7226aa0b9bb1d83a52a"
+react-native-snackbar-component@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/react-native-snackbar-component/-/react-native-snackbar-component-1.0.2.tgz#503f9f450a189044f435644580cd8a25c9abfe9a"
 
 react-native-tabs@^1.0.9:
   version "1.0.9"

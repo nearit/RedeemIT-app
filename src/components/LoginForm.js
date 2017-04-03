@@ -3,6 +3,7 @@ import { KeyboardAvoidingView, Image, Linking } from 'react-native'
 import { connect } from 'react-redux'
 import { Card, CardSection, MaterialInput, LinkText, RoundedButton } from './common'
 import { emailChanged, passwordChanged, loginUser } from '../actions'
+import SnackBar from 'react-native-snackbar-component'
 
 class LoginForm extends Component {
   supportEmail = 'mailto:support@nearit.com?subject=Subject&body=body'
@@ -41,8 +42,9 @@ class LoginForm extends Component {
     } = styles
 
     const {
-      email,
-      password
+        email,
+        password,
+        error
     } = this.props
 
     return (
@@ -100,6 +102,7 @@ class LoginForm extends Component {
             </CardSection>
           </Card>
         </KeyboardAvoidingView>
+        <SnackBar visible={error} textMessage={error} backgroundColor="#E91832"/>
 
       </Image>
     )
@@ -142,9 +145,9 @@ const styles = {
 }
 
 const mapStateToProps = ({auth}) => {
-  const {email, password} = auth
+  const {email, password, error} = auth
 
-  return {email, password}
+  return {email, password, error}
 }
 
 const mapActionsToProps = {

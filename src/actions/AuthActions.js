@@ -1,5 +1,4 @@
 import { Actions } from 'react-native-router-flux'
-import Snackbar from 'react-native-snackbar'
 import { createResource } from '../services'
 
 export const AUTH_EMAIL_CHANGED = 'auth_email_changed'
@@ -8,6 +7,8 @@ export const AUTH_PASSWORD_CHANGED = 'auth_password_changed'
 export const AUTH_LOGIN = 'auth_login'
 export const AUTH_LOGIN_SUCCESS = 'auth_login_success'
 export const AUTH_LOGIN_FAILED = 'auth_login_failed'
+
+export const AUTH_RESET_ERROR = 'AUTH_RESET_ERROR'
 
 export const AUTH_LOGOUT = 'auth_login'
 
@@ -35,12 +36,7 @@ export const loginUser = ({email, password}) => {
       })
       .catch((err) => {
         dispatch({type: AUTH_LOGIN_FAILED})
-        // Notify user
-        Snackbar.show({
-          backgroundColor: '#e91832',
-          title: 'Login fallito, controlla le tue credenziali.',
-          duration: Snackbar.LENGTH_LONG,
-        })
+          setTimeout(() => dispatch({type : AUTH_RESET_ERROR}), 3000)
       })
   }
 }

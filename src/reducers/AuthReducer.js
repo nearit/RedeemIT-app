@@ -4,14 +4,15 @@ import {
   AUTH_LOGIN,
   AUTH_LOGIN_SUCCESS,
   AUTH_LOGIN_FAILED,
-  AUTH_LOGOUT
+  AUTH_LOGOUT,
+  AUTH_RESET_ERROR
 } from '../actions'
 
 const INITIAL_STATE = {
   email: '',
   password: '',
   loading: false,
-  error: '',
+  error: null,
   token: null
 }
 
@@ -24,13 +25,16 @@ export default (state = INITIAL_STATE, action) => {
       return {...state, password: action.payload}
 
     case AUTH_LOGIN:
-      return {...state, loading: true, error: ''}
+      return {...state, loading: true, error: null}
 
     case AUTH_LOGIN_SUCCESS:
       return {...state, ...INITIAL_STATE, token: action.payload}
 
     case AUTH_LOGIN_FAILED:
-      return {...state, password: '', loading: false, error: 'Errore di autenticazione.'}
+      return {...state, password: '', loading: false, error: 'Login fallito, controlla le tue credenziali.'}
+
+      case AUTH_RESET_ERROR:
+        return {...state, error : null}
 
     case AUTH_LOGOUT:
       return {...INITIAL_STATE}
