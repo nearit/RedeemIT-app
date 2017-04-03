@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Image, Text } from 'react-native'
+import { StatusBar, View, Image, Text } from 'react-native'
 import { connect } from 'react-redux'
 import { BorderView, CardSection, RoundedButton } from '../components/common'
 import { couponReset } from '../actions'
@@ -75,6 +75,9 @@ class CouponResult extends Component {
         source={require('../assets/background.png')}
         style={pageStyle}
       >
+
+        <StatusBar barStyle='light-content'/>
+
         <View style={overlayStyle}>
           <BorderView style={[baseResultContainerStyle, additionalResultContainerStyle]}>
             <CardSection>

@@ -1,24 +1,15 @@
 import React, { Component } from 'react'
-import { KeyboardAvoidingView, Image, Linking } from 'react-native'
+import { StatusBar, KeyboardAvoidingView, Image } from 'react-native'
 import { connect } from 'react-redux'
+import { email } from 'react-native-communications'
 import { Card, CardSection, MaterialInput, LinkText, RoundedButton } from './common'
 import { emailChanged, passwordChanged, loginUser } from '../actions'
 import SnackBar from 'react-native-snackbar-component'
 
 class LoginForm extends Component {
-  supportEmail = 'mailto:support@nearit.com?subject=Subject&body=body'
-  supportSite = 'https://go.nearit.com'
 
   openPasswordRecoveryPage () {
-    Linking.canOpenURL(this.supportEmail)
-      .then(supported => {
-        if (!supported) {
-          return Linking.openURL(this.supportSite)
-        } else {
-          return Linking.openURL(this.supportEmail)
-        }
-      })
-      .catch(err => console.error('An error occurred', err))
+    email(['support@nearit.com'], [], [], 'Forgotten NearIT password', 'Hello!\n\nDon\'t worry about forgetting your password, all you have to do is to send this email to us and we\'ll be happy to get back to you with the new password.\n\nAll the best. The NearIT Team')
   }
 
   onLoginPress () {
@@ -38,19 +29,22 @@ class LoginForm extends Component {
       iconContainerStyle,
       iconStyle,
       linkContainerStyle,
+      linkTextStyle,
       buttonContainerStyle
     } = styles
 
     const {
-        email,
-        password,
-        error
+      email,
+      password,
+      error
     } = this.props
 
     return (
       <Image
         source={require('../assets/background.png')}
         style={pageStyle}>
+
+        <StatusBar barStyle='dark-content'/>
 
         <KeyboardAvoidingView behavior='padding'>
           <Card style={loginFormStyle}>
@@ -92,7 +86,12 @@ class LoginForm extends Component {
             </CardSection>
 
             <CardSection style={linkContainerStyle}>
-              <LinkText onPress={this.openPasswordRecoveryPage.bind(this)}>Hai dimenticato la password?</LinkText>
+              <LinkText
+                style={linkTextStyle}
+                onPress={this.openPasswordRecoveryPage.bind(this)}
+              >
+                Hai dimenticato la password?
+              </LinkText>
             </CardSection>
 
             <CardSection style={buttonContainerStyle}>
@@ -102,6 +101,7 @@ class LoginForm extends Component {
             </CardSection>
           </Card>
         </KeyboardAvoidingView>
+
         <SnackBar visible={error} textMessage={error} backgroundColor="#E91832"/>
 
       </Image>
@@ -122,7 +122,6 @@ const styles = {
   },
   loginFormStyle: {
     width: 300,
-    height: 300,
     backgroundColor: 'white',
     alignSelf: 'center'
   },
@@ -135,7 +134,14 @@ const styles = {
   },
   linkContainerStyle: {
     marginTop: 20,
-    marginBottom: 20
+    marginBottom: 30,
+    alignItems: 'flex-start'
+  },
+  linkTextStyle: {
+    alignSelf: 'flex-start',
+    fontSize: 14,
+    fontWeight: '600',
+    fontStyle: 'italic'
   },
   buttonContainerStyle: {
     width: 250,

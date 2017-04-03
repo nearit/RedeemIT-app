@@ -1,13 +1,12 @@
 import React from 'react'
 import { Text, TouchableOpacity } from 'react-native'
 
-const LinkText = ({ textColor, onPress, children }) => {
-  const { linkStyle, textStyle } = styles
-  const linkTextColor = textColor || textStyle.color
+const LinkText = ({onPress, children, style}) => {
+  const {linkStyle, textStyle} = styles
 
   return (
     <TouchableOpacity onPress={onPress} style={linkStyle}>
-      <Text style={{ ...textStyle, color: linkTextColor }}>
+      <Text style={[textStyle, style]}>
         {children}
       </Text>
     </TouchableOpacity>

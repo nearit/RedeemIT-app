@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, Image } from 'react-native'
+import { StatusBar, Text } from 'react-native'
 import Camera from 'react-native-camera'
 import { connect } from 'react-redux'
 import { BorderView, Button, CardSection, Spacer, FooterBar, IconButton } from './common'
@@ -33,6 +33,8 @@ class CameraView extends Component {
         style={PageStyle}
         aspect={Camera.constants.Aspect.fill}
         onBarCodeRead={(event) => this.onBarCodeRead(event)}>
+
+        <StatusBar barStyle='light-content'/>
 
         <CardSection style={HintContainerStyle}>
           <Text style={HintStyle}>Inquadra il QR code con la fotocamera</Text>

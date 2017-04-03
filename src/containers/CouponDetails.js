@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Image } from 'react-native'
+import { StatusBar, View, Image } from 'react-native'
 import { connect } from 'react-redux'
 import { couponReset, couponRedeem } from '../actions'
 import { Spacer, FooterBar, IconButton } from '../components/common'
@@ -63,6 +63,9 @@ class CouponDetails extends Component {
         source={require('../assets/background.png')}
         style={pageStyle}
       >
+
+        <StatusBar barStyle='light-content'/>
+
         <View style={overlayStyle}>
           <Spacer />
 
