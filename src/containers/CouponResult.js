@@ -6,9 +6,9 @@ import { couponReset } from '../actions'
 
 class CouponResult extends Component {
 
-  constructor(props) {
+  constructor (props) {
     super(props)
-      this.handleBack = this.handleBack.bind(this)
+    this.handleBack = this.handleBack.bind(this)
   }
 
   onButtonPressed () {
@@ -35,20 +35,19 @@ class CouponResult extends Component {
     )
   }
 
-    componentDidMount() {
-        BackAndroid.addEventListener('hardwareBackPress', this.handleBack);
-    }
+  componentDidMount () {
+    BackAndroid.addEventListener('hardwareBackPress', this.handleBack)
+  }
 
+  componentWillUnmount () {
+    //Forgetting to remove the listener will cause pop executes multiple times
+    BackAndroid.removeEventListener('hardwareBackPress', this.handleBack)
+  }
 
-    componentWillUnmount() {
-        //Forgetting to remove the listener will cause pop executes multiple times
-        BackAndroid.removeEventListener('hardwareBackPress', this.handleBack);
-    }
-
-    handleBack() {
-        this.onButtonPressed()
-        return true;
-    }
+  handleBack () {
+    this.onButtonPressed()
+    return true
+  }
 
   renderActionButton () {
     const {error} = this.props

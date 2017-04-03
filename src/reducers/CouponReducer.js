@@ -9,7 +9,7 @@ import {
 } from '../actions'
 
 const INITIAL_STATE = {
-  serialCode: '',
+  serialCode: null,
   loading: false,
   error: false,
   couponDetails: {},

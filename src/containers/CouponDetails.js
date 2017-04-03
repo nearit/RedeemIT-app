@@ -7,9 +7,9 @@ import CouponDetailsCard from '../components/CouponDetailsCard'
 
 class CouponDetails extends Component {
 
-  constructor(props) {
+  constructor (props) {
     super(props)
-      this.handleBack = this.handleBack.bind(this)
+    this.handleBack = this.handleBack.bind(this)
   }
 
   onRedeemButtonPressed () {
@@ -24,20 +24,19 @@ class CouponDetails extends Component {
     couponReset()
   }
 
-    componentDidMount() {
-        BackAndroid.addEventListener('hardwareBackPress', this.handleBack);
-    }
+  componentDidMount () {
+    BackAndroid.addEventListener('hardwareBackPress', this.handleBack)
+  }
 
+  componentWillUnmount () {
+    //Forgetting to remove the listener will cause pop executes multiple times
+    BackAndroid.removeEventListener('hardwareBackPress', this.handleBack)
+  }
 
-    componentWillUnmount() {
-        //Forgetting to remove the listener will cause pop executes multiple times
-        BackAndroid.removeEventListener('hardwareBackPress', this.handleBack);
-    }
-
-    handleBack() {
-        this.onCancelButtonPressed()
-        return true;
-    }
+  handleBack () {
+    this.onCancelButtonPressed()
+    return true
+  }
 
   renderButtons () {
     const {couponDetails} = this.props
