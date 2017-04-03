@@ -50,7 +50,7 @@ class LoginForm extends Component {
         source={require('../assets/background.png')}
         style={pageStyle}>
 
-        <KeyboardAvoidingView behavior='position'>
+        <KeyboardAvoidingView behavior='padding'>
           <Card style={loginFormStyle}>
 
             <CardSection style={iconContainerStyle}>
