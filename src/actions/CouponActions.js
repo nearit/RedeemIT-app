@@ -9,28 +9,34 @@ export const COUPON_RESET = 'coupon_reset'
 export const COUPON_REDEEM = 'coupon_redeem'
 export const COUPON_REDEEM_SUCCESS = 'coupon_redeem_success'
 export const COUPON_REDEEM_FAILED = 'coupon_redeem_failed'
+import { NavigationActions } from 'react-navigation'
 
 export const couponDetected = (couponSerial) => {
   return (dispatch) => {
     dispatch({type: COUPON_DETECTED, payload: couponSerial})
 
-    readResource('/plugins/coupon-blaster/claims/' + couponSerial, {params: {include: 'coupon'}})
+    readResource(`/plugins/coupon-blaster/claims/${couponSerial}`, {params: {include: 'coupon'}})
       .then(({data}) => {
         const {coupon} = data.included
 
         dispatch({type: COUPON_DETECTED_SUCCESS, payload: {...coupon, ...data.meta}})
 
-          dispatch({
-              type : 'Navigation/NAVIGATE',
-              routeName : 'Details'
-          })
+          dispatch(NavigationActions.reset({
+              index : 0,
+              actions : [
+                  NavigationActions.navigate( {routeName : 'Details'})
+              ]
+          }))
+
       })
       .catch((error) => {
         dispatch({type: COUPON_DETECTED_FAILED})
-          dispatch({
-              type : 'Navigation/NAVIGATE',
-              routeName : 'Result'
-          })
+          dispatch(NavigationActions.reset({
+              index : 0,
+              actions : [
+                  NavigationActions.navigate( {routeName : 'Result'})
+              ]
+          }))
       })
 
   }
@@ -42,10 +48,12 @@ export const couponReset = () => {
     dispatch({type: COUPON_RESET})
 
     // Go back to camera
-      dispatch({
-          type : 'Navigation/NAVIGATE',
-          routeName : 'Main'
-      })
+      dispatch(NavigationActions.reset({
+          index : 0,
+          actions : [
+              NavigationActions.navigate( {routeName : 'Main'})
+          ]
+      }))
   }
 }
 
@@ -58,19 +66,21 @@ export const couponRedeem = (couponSerial) => {
     createResource(`/plugins/coupon-blaster/claims/${couponSerial}/redeem`, {})
       .then((response) => {
         dispatch({type: COUPON_REDEEM_SUCCESS})
-
-          dispatch({
-              type : 'Navigation/NAVIGATE',
-              routeName : 'Result'
-          })
+          dispatch(NavigationActions.reset({
+              index : 0,
+              actions : [
+                  NavigationActions.navigate( {routeName : 'Result'})
+              ]
+          }))
       })
       .catch((error) => {
         dispatch({type: COUPON_REDEEM_FAILED})
-
-          dispatch({
-              type : 'Navigation/NAVIGATE',
-              routeName : 'Result'
-          })
+          dispatch(NavigationActions.reset({
+              index : 0,
+              actions : [
+                  NavigationActions.navigate( {routeName : 'Result'})
+              ]
+          }))
       })
   }
 }

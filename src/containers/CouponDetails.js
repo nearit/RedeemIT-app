@@ -1,11 +1,16 @@
 import React, { Component } from 'react'
-import { StatusBar, View, Image } from 'react-native'
+import { StatusBar, View, Image, BackAndroid } from 'react-native'
 import { connect } from 'react-redux'
 import { couponReset, couponRedeem } from '../actions'
 import { Spacer, FooterBar, IconButton } from '../components/common'
 import CouponDetailsCard from '../components/CouponDetailsCard'
 
 class CouponDetails extends Component {
+
+  constructor(props) {
+    super(props)
+      this.handleBack = this.handleBack.bind(this)
+  }
 
   onRedeemButtonPressed () {
     const {serialCode, couponRedeem} = this.props
@@ -18,6 +23,21 @@ class CouponDetails extends Component {
 
     couponReset()
   }
+
+    componentDidMount() {
+        BackAndroid.addEventListener('hardwareBackPress', this.handleBack);
+    }
+
+
+    componentWillUnmount() {
+        //Forgetting to remove the listener will cause pop executes multiple times
+        BackAndroid.removeEventListener('hardwareBackPress', this.handleBack);
+    }
+
+    handleBack() {
+        this.onCancelButtonPressed()
+        return true;
+    }
 
   renderButtons () {
     const {couponDetails} = this.props
