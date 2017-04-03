@@ -11,7 +11,7 @@ export const AUTH_RESET_ERROR = 'AUTH_RESET_ERROR'
 
 export const AUTH_LOGOUT = 'auth_login'
 
-import {NavigationActions} from 'react-navigation'
+import { NavigationActions } from 'react-navigation'
 
 export const emailChanged = (email) => {
   return {
@@ -45,17 +45,14 @@ export const loginUser = ({email, password}) => {
 const onLoginSuccess = (dispatch, {data}) => {
   const {token} = data.data.attributes
   dispatch({type: AUTH_LOGIN_SUCCESS, payload: token})
-  dispatch({
-      type : 'Navigation/NAVIGATE',
-      routeName : 'Main'
-  })
+    NavigationActions.navigate({routeName : 'Main'})
 }
 
 export const logoutUser = () => {
   return (dispatch) => {
     dispatch({type: AUTH_LOGOUT})
       dispatch({
-          type : 'Navigation/NAVIGATE',
+          type : 'Navigation/RESET',
           routeName : 'Auth'
       })
   }

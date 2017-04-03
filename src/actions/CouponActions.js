@@ -21,14 +21,14 @@ export const couponDetected = (couponSerial) => {
         dispatch({type: COUPON_DETECTED_SUCCESS, payload: {...coupon, ...data.meta}})
 
           dispatch({
-              type : 'Navigation/NAVIGATE',
+              type : 'Navigation/RESET',
               routeName : 'Details'
           })
       })
       .catch((error) => {
         dispatch({type: COUPON_DETECTED_FAILED})
           dispatch({
-              type : 'Navigation/NAVIGATE',
+              type : 'Navigation/RESET',
               routeName : 'Result'
           })
       })
@@ -43,7 +43,7 @@ export const couponReset = () => {
 
     // Go back to camera
       dispatch({
-          type : 'Navigation/NAVIGATE',
+          type : 'Navigation/RESET',
           routeName : 'Main'
       })
   }
@@ -60,7 +60,7 @@ export const couponRedeem = (couponSerial) => {
         dispatch({type: COUPON_REDEEM_SUCCESS})
 
           dispatch({
-              type : 'Navigation/NAVIGATE',
+              type : 'Navigation/RESET',
               routeName : 'Result'
           })
       })
@@ -68,7 +68,7 @@ export const couponRedeem = (couponSerial) => {
         dispatch({type: COUPON_REDEEM_FAILED})
 
           dispatch({
-              type : 'Navigation/NAVIGATE',
+              type : 'Navigation/RESET',
               routeName : 'Result'
           })
       })
