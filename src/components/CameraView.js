@@ -54,7 +54,9 @@ class CameraView extends Component {
         aspect={Camera.constants.Aspect.fill}
         onBarCodeRead={(event) => this.onBarCodeRead(event)}>
 
-        <StatusBar barStyle='light-content'/>
+        <StatusBar barStyle='light-content'
+                   translucent={true}
+                   backgroundColor={'rgba(0, 0, 0, 0.1)'}/>
 
         <CardSection style={HintContainerStyle}>
           <Text style={HintStyle}>Inquadra il QR code con la fotocamera</Text>

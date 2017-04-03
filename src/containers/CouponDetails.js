@@ -83,7 +83,9 @@ class CouponDetails extends Component {
         style={pageStyle}
       >
 
-        <StatusBar barStyle='light-content'/>
+        <StatusBar barStyle='light-content'
+                   translucent={true}
+                   backgroundColor={'rgba(0, 0, 0, 0.1)'}/>
 
         <View style={overlayStyle}>
           <Spacer />

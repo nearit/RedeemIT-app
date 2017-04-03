@@ -44,7 +44,9 @@ class LoginForm extends Component {
         source={require('../assets/background.png')}
         style={pageStyle}>
 
-        <StatusBar barStyle='default' translucent={true}/>
+        <StatusBar barStyle='default'
+                   translucent={true}
+                   backgroundColor={'rgba(0, 0, 0, 0.1)'} />
 
         <KeyboardAvoidingView behavior='padding'>
           <Card style={loginFormStyle}>
