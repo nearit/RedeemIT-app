@@ -36,7 +36,8 @@ class LoginForm extends Component {
     const {
       email,
       password,
-      error
+      error,
+      loading
     } = this.props
 
     return (
@@ -46,7 +47,7 @@ class LoginForm extends Component {
 
         <StatusBar barStyle='default'
                    translucent={true}
-                   backgroundColor={'rgba(0, 0, 0, 0.1)'} />
+                   backgroundColor={'rgba(0, 0, 0, 0.1)'}/>
 
         <KeyboardAvoidingView behavior='padding'>
           <Card style={loginFormStyle}>
@@ -97,9 +98,14 @@ class LoginForm extends Component {
             </CardSection>
 
             <CardSection style={buttonContainerStyle}>
-              <RoundedButton onPress={this.onLoginPress.bind(this)}>
+              <RoundedButton
+                onPress={this.onLoginPress.bind(this)}
+                loading={loading}
+              >
                 OK
               </RoundedButton>
+
+
             </CardSection>
           </Card>
         </KeyboardAvoidingView>
@@ -146,16 +152,15 @@ const styles = {
     fontStyle: 'italic'
   },
   buttonContainerStyle: {
-    width: 250,
     height: 50,
     alignSelf: 'center'
   }
 }
 
 const mapStateToProps = ({auth}) => {
-  const {email, password, error} = auth
+  const {email, password, error, loading} = auth
 
-  return {email, password, error}
+  return {email, password, error, loading}
 }
 
 const mapActionsToProps = {
