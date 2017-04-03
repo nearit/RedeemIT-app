@@ -44,7 +44,7 @@ class LoginForm extends Component {
         source={require('../assets/background.png')}
         style={pageStyle}>
 
-        <StatusBar barStyle='dark-content'/>
+        <StatusBar barStyle='default' translucent={true}/>
 
         <KeyboardAvoidingView behavior='padding'>
           <Card style={loginFormStyle}>
