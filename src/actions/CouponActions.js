@@ -1,4 +1,3 @@
-import { Actions, ActionConst } from 'react-native-router-flux'
 import { readResource, createResource } from '../services'
 
 export const COUPON_DETECTED = 'coupon_detected'
@@ -21,11 +20,17 @@ export const couponDetected = (couponSerial) => {
 
         dispatch({type: COUPON_DETECTED_SUCCESS, payload: {...coupon, ...data.meta}})
 
-        Actions.details()
+          dispatch({
+              type : 'Navigation/NAVIGATE',
+              routeName : 'Details'
+          })
       })
       .catch((error) => {
         dispatch({type: COUPON_DETECTED_FAILED})
-        Actions.result()
+          dispatch({
+              type : 'Navigation/NAVIGATE',
+              routeName : 'Result'
+          })
       })
 
   }
@@ -37,7 +42,10 @@ export const couponReset = () => {
     dispatch({type: COUPON_RESET})
 
     // Go back to camera
-    Actions.camera({type: ActionConst.REPLACE})
+      dispatch({
+          type : 'Navigation/NAVIGATE',
+          routeName : 'Main'
+      })
   }
 }
 
@@ -51,12 +59,18 @@ export const couponRedeem = (couponSerial) => {
       .then((response) => {
         dispatch({type: COUPON_REDEEM_SUCCESS})
 
-        Actions.result()
+          dispatch({
+              type : 'Navigation/NAVIGATE',
+              routeName : 'Result'
+          })
       })
       .catch((error) => {
         dispatch({type: COUPON_REDEEM_FAILED})
 
-        Actions.result()
+          dispatch({
+              type : 'Navigation/NAVIGATE',
+              routeName : 'Result'
+          })
       })
   }
 }

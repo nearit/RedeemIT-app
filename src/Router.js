@@ -1,42 +1,24 @@
-import React from 'react'
-import { Router, Scene, ActionConst } from 'react-native-router-flux'
-import LoginForm from './components/LoginForm'
-import CameraView from './components/CameraView'
-import CouponDetails from './containers/CouponDetails'
-import CouponResult from './containers/CouponResult'
+import React, { Component } from 'react'
+import {connect} from 'react-redux'
+import {addNavigationHelpers} from 'react-navigation'
+import AppNavigator from './AppNavigator'
 
-const RouterComponent = () => {
-  return (
-    <Router hideNavBar
-            panHandlers={null}
-            type={ActionConst.RESET}>
-      <Scene key='auth'>
-        <Scene
-          key='login'
-          component={LoginForm}
-          initial
-        />
-      </Scene>
-
-      <Scene key='main'>
-        <Scene
-          key='camera'
-          component={CameraView}
-          initial
-        />
-
-        <Scene
-          key='details'
-          component={CouponDetails}
-        />
-
-        <Scene
-          key='result'
-          component={CouponResult}
-        />
-      </Scene>
-    </Router>
-  )
+class AppWithNavigationState extends Component {
+    render () {
+        return (
+            <AppNavigator
+                navigation={
+                    addNavigationHelpers({
+                        dispatch: this.props.dispatch,
+                        state: this.props.nav,
+                        })
+                }
+            >
+            </AppNavigator>
+        )
+    }
 }
 
-export default RouterComponent
+const mapStateToProps = (state) =>  ({nav : state.nav});
+
+export default connect(mapStateToProps, null)(AppWithNavigationState)
