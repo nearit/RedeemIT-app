@@ -4,9 +4,9 @@ import moment from 'moment'
 import { Card, CardSection, NrtImage } from '../components/common'
 
 const renderValidityPeriod = ({redeemable, expired, redeemable_from, expires_at}) => {
-  const {validitySectionStyle, validityErrorStyle} = styles
+  const {validitySectionStyle, validityTextStyle, validityErrorStyle} = styles
 
-  let textStyle = []
+  let textStyle = [validityTextStyle]
 
   let validity_period_text = ''
 
@@ -31,14 +31,20 @@ const renderValidityPeriod = ({redeemable, expired, redeemable_from, expires_at}
       <CardSection style={[validitySectionStyle, {paddingBottom: 25}]}>
         <Text style={textStyle}>{validity_period_text}</Text>
       </CardSection>
-
-      <CardSection>
-        <Image
-          source={require('../assets/trapezio-bottom.png')}
-        />
-      </CardSection>
     </View>
   )
+}
+
+const renderCouponDescription = ({redeemable, description}) => {
+  const {descriptionSectionStyle, descriptionTextStyle} = styles
+
+  if (redeemable) {
+    return (
+      <CardSection style={descriptionSectionStyle}>
+        <Text style={descriptionTextStyle}>{description}</Text>
+      </CardSection>
+    )
+  }
 }
 
 const renderCouponStatusSection = (coupon) => {
@@ -47,7 +53,7 @@ const renderCouponStatusSection = (coupon) => {
 
   if (redeemed) {
     return (
-      <CardSection style={[statusSectionStyle, {backgroundColor: 'white'}]}>
+      <CardSection style={statusSectionStyle}>
         <Text style={statusTextStyle}>COUPON GIA' UTILIZZATO</Text>
       </CardSection>
     )
@@ -93,7 +99,7 @@ const renderCouponStatusSection = (coupon) => {
         />
       </CardSection>
 
-      <CardSection style={statusSectionStyle}>
+      <CardSection style={[statusSectionStyle, {backgroundColor: 'white'}]}>
         <Text style={[statusTextStyle, successStatusTextStyle]}>CODICE COUPON VALIDO</Text>
       </CardSection>
     </View>
@@ -132,6 +138,14 @@ const CouponDetailsCard = (props) => {
       </CardSection>
 
       {renderValidityPeriod(coupon)}
+
+      {renderCouponDescription(coupon)}
+
+      <CardSection>
+        <Image
+          source={require('../assets/trapezio-bottom.png')}
+        />
+      </CardSection>
 
       {renderCouponStatusSection(coupon)}
 
@@ -180,15 +194,30 @@ const styles = {
   },
   valueStyle: {
     fontSize: 18,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    lineHeight: 18
   },
   validitySectionStyle: {
     paddingLeft: 25,
     paddingRight: 25,
     backgroundColor: 'white'
   },
+  validityTextStyle: {
+    fontSize: 13,
+    lineHeight: 17
+  },
   validityErrorStyle: {
     color: '#e91832'
+  },
+  descriptionSectionStyle: {
+    paddingBottom: 20,
+    paddingLeft: 25,
+    paddingRight: 25,
+    backgroundColor: 'white'
+  },
+  descriptionTextStyle: {
+    fontSize: 15,
+    lineHeight: 18
   },
   statusSectionStyle: {
     paddingTop: 20,
@@ -201,7 +230,8 @@ const styles = {
     color: '#e91832',
     fontSize: 18,
     fontWeight: 'bold',
-    textAlign: 'center'
+    textAlign: 'center',
+    lineHeight: 27
   },
   successStatusTextStyle: {
     color: '#68c600'

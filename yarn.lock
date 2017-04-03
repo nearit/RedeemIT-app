@@ -2915,6 +2915,10 @@ raw-body@~2.1.2:
     iconv-lite "0.4.13"
     unpipe "1.0.0"
 
+react-addons-pure-render-mixin@15.0.2:
+  version "15.0.2"
+  resolved "https://registry.yarnpkg.com/react-addons-pure-render-mixin/-/react-addons-pure-render-mixin-15.0.2.tgz#b7731c5cc7f21214d68a78c84f40df3aefdf462f"
+
 react-addons-pure-render-mixin@^15.0.2:
   version "15.4.2"
   resolved "https://registry.yarnpkg.com/react-addons-pure-render-mixin/-/react-addons-pure-render-mixin-15.4.2.tgz#a8433c71c45e2368503721921dc47bdaf1fbabcd"
@@ -2949,10 +2953,11 @@ react-native-material-textfield@^0.2.4:
   version "0.2.4"
   resolved "https://registry.yarnpkg.com/react-native-material-textfield/-/react-native-material-textfield-0.2.4.tgz#1dda02f521ae784f5915622e5f7a2e1671dae7f3"
 
-react-native-router-flux@^3.38.0:
-  version "3.38.0"
-  resolved "https://registry.yarnpkg.com/react-native-router-flux/-/react-native-router-flux-3.38.0.tgz#f5f8ec2875b46f96f61006ff502d0d80268e6ce2"
+react-native-router-flux@3.35.0:
+  version "3.35.0"
+  resolved "https://registry.yarnpkg.com/react-native-router-flux/-/react-native-router-flux-3.35.0.tgz#1ca65abe81ad3641c324d8c20fc0b90f275361c7"
   dependencies:
+    react-addons-pure-render-mixin "15.0.2"
     react-native-experimental-navigation "0.26.x"
     react-native-tabs "^1.0.9"
     react-static-container "1.0.1"

@@ -1,4 +1,4 @@
-import { Actions } from 'react-native-router-flux'
+import { Actions, ActionConst } from 'react-native-router-flux'
 import { createResource } from '../services'
 
 export const AUTH_EMAIL_CHANGED = 'auth_email_changed'
@@ -36,7 +36,7 @@ export const loginUser = ({email, password}) => {
       })
       .catch((err) => {
         dispatch({type: AUTH_LOGIN_FAILED})
-          setTimeout(() => dispatch({type : AUTH_RESET_ERROR}), 3000)
+        setTimeout(() => dispatch({type: AUTH_RESET_ERROR}), 3000)
       })
   }
 }
@@ -44,12 +44,12 @@ export const loginUser = ({email, password}) => {
 const onLoginSuccess = (dispatch, {data}) => {
   const {token} = data.data.attributes
   dispatch({type: AUTH_LOGIN_SUCCESS, payload: token})
-  Actions.main()
+  Actions.main({type: ActionConst.RESET})
 }
 
 export const logoutUser = () => {
   return (dispatch) => {
     dispatch({type: AUTH_LOGOUT})
-    Actions.auth()
+    Actions.auth({type: ActionConst.RESET})
   }
 }

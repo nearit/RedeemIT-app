@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { View, Text, Image } from 'react-native'
 import Camera from 'react-native-camera'
 import { connect } from 'react-redux'
-import { BorderView, Button, CardSection, Spacer, FooterButton } from './common'
+import { BorderView, Button, CardSection, Spacer, FooterBar, IconButton } from './common'
 import { logoutUser, couponDetected } from '../actions'
 
 class CameraView extends Component {
@@ -40,14 +40,15 @@ class CameraView extends Component {
 
         <CardSection style={ViewFinderContainerStyle}>
           <BorderView style={ViewFinderStyle}/>
-          <Button onPress={() => this.onBarCodeRead({data: '8A6305FD7A87'})}><Text>Test</Text></Button>
         </CardSection>
 
-        <FooterButton
-          onPress={this.onLogoutPress.bind(this)}
-          label='Logout'
-          icon={require('../assets/unlock.png')}
-        />
+        <FooterBar>
+          <IconButton
+            onPress={this.onLogoutPress.bind(this)}
+            label='Logout'
+            icon={require('../assets/unlock.png')}
+          />
+        </FooterBar>
       </Camera>
     )
   }

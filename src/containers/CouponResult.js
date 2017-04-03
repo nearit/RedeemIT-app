@@ -6,13 +6,7 @@ import { couponReset } from '../actions'
 
 class CouponResult extends Component {
 
-  onRetryButtonPressed () {
-    const {couponReset} = this.props
-
-    couponReset()
-  }
-
-  onOkButtonPressed () {
+  onButtonPressed () {
     const {couponReset} = this.props
 
     couponReset()
@@ -45,7 +39,7 @@ class CouponResult extends Component {
         <RoundedButton
           style={actionButtonStyle}
           textStyle={actionButtonLabelStyle}
-          onPress={this.onRetryButtonPressed.bind(this)}
+          onPress={this.onButtonPressed.bind(this)}
         >
           RIPROVA
         </RoundedButton>
@@ -56,7 +50,7 @@ class CouponResult extends Component {
       <RoundedButton
         style={actionButtonStyle}
         textStyle={actionButtonLabelStyle}
-        onPress={this.onOkButtonPressed.bind(this)}
+        onPress={this.onButtonPressed.bind(this)}
       >
         OK
       </RoundedButton>

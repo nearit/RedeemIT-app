@@ -1,21 +1,54 @@
 import React, { Component } from 'react'
-import { View, Image, Text } from 'react-native'
+import { View, Image } from 'react-native'
 import { connect } from 'react-redux'
-import { Actions } from 'react-native-router-flux'
-import { couponReset } from '../actions'
-import { Button, FooterButton, Spacer, Card, CardSection } from '../components/common'
+import { couponReset, couponRedeem } from '../actions'
+import { Spacer, FooterBar, IconButton } from '../components/common'
 import CouponDetailsCard from '../components/CouponDetailsCard'
 
 class CouponDetails extends Component {
 
   onRedeemButtonPressed () {
-    Actions.pop()
+    const {serialCode, couponRedeem} = this.props
+
+    couponRedeem(serialCode)
   }
 
   onCancelButtonPressed () {
     const {couponReset} = this.props
 
     couponReset()
+  }
+
+  renderButtons () {
+    const {couponDetails} = this.props
+
+    if (!couponDetails.redeemable) {
+      return (
+        <FooterBar>
+          <IconButton
+            onPress={this.onCancelButtonPressed.bind(this)}
+            label='Chiudi'
+            icon={require('../assets/close.png')}
+          />
+        </FooterBar>
+      )
+    }
+
+    return (
+      <FooterBar>
+        <IconButton
+          onPress={this.onRedeemButtonPressed.bind(this)}
+          label='Applica coupon'
+          style={{backgroundColor: '#68c600'}}
+          labelStyle={{color: 'white'}}
+        />
+
+        <IconButton
+          onPress={this.onCancelButtonPressed.bind(this)}
+          label='Non applicare'
+        />
+      </FooterBar>
+    )
   }
 
   render () {
@@ -39,11 +72,7 @@ class CouponDetails extends Component {
             style={{flex: 2, alignItems: 'center', justifyContent: 'center'}}
           />
 
-          <FooterButton
-            onPress={this.onCancelButtonPressed.bind(this)}
-            label='Chiudi'
-            icon={require('../assets/close.png')}
-          />
+          {this.renderButtons()}
         </View>
       </Image>
     )
@@ -98,9 +127,9 @@ const styles = {
 }
 
 const mapStateToProps = ({coupon}) => {
-  const {error, couponDetails, redeemStatus} = coupon
+  const {error, serialCode, couponDetails, redeemStatus} = coupon
 
-  return {error, couponDetails, redeemStatus}
+  return {error, serialCode, couponDetails, redeemStatus}
 }
 
-export default connect(mapStateToProps, {couponReset})(CouponDetails)
+export default connect(mapStateToProps, {couponReset, couponRedeem})(CouponDetails)

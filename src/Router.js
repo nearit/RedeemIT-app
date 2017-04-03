@@ -1,5 +1,5 @@
 import React from 'react'
-import { Scene, Router } from 'react-native-router-flux'
+import { Router, Scene, ActionConst } from 'react-native-router-flux'
 import LoginForm from './components/LoginForm'
 import CameraView from './components/CameraView'
 import CouponDetails from './containers/CouponDetails'
@@ -7,7 +7,9 @@ import CouponResult from './containers/CouponResult'
 
 const RouterComponent = () => {
   return (
-    <Router hideNavBar panHandlers={null}>
+    <Router hideNavBar
+            panHandlers={null}
+            type={ActionConst.RESET}>
       <Scene key='auth'>
         <Scene
           key='login'

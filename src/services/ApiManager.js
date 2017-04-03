@@ -61,9 +61,13 @@ export const createResource = (url, data) => {
     url,
     data,
     {
-      transformRequest: [function (data) {
-        // Do whatever you want to transform the data
-        return JSON.stringify(JsonApiUtils.toJsonApiModel(data))
+      transformRequest: [function (response) {
+        try {
+          // Do whatever you want to transform the data
+          return JSON.stringify(JsonApiUtils.toJsonApiModel(response))
+        } catch (err) {
+          return response
+        }
       }]
     })
 }
