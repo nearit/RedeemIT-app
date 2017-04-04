@@ -47,9 +47,28 @@ const renderCouponDescription = ({redeemable, description}) => {
   }
 }
 
-const renderCouponStatusSection = (coupon) => {
+const renderCouponBottomFiller = ({redeemed}) => {
+  if (redeemed) {
+    return (
+      <CardSection>
+        <Image
+          source={require('../assets/trapezio-bottom-used.png')}
+        />
+      </CardSection>
+    )
+  }
+
+  return (
+    <CardSection>
+      <Image
+        source={require('../assets/trapezio-bottom.png')}
+      />
+    </CardSection>
+  )
+}
+
+const renderCouponStatusSection = ({expired, redeemed, redeemable}) => {
   const {statusSectionStyle, statusTextStyle, successStatusTextStyle} = styles
-  const {expired, redeemed, redeemable} = coupon
 
   if (redeemed) {
     return (
@@ -141,11 +160,7 @@ const CouponDetailsCard = (props) => {
 
       {renderCouponDescription(coupon)}
 
-      <CardSection>
-        <Image
-          source={require('../assets/trapezio-bottom.png')}
-        />
-      </CardSection>
+      {renderCouponBottomFiller(coupon)}
 
       {renderCouponStatusSection(coupon)}
 
