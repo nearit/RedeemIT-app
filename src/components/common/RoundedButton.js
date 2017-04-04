@@ -31,7 +31,7 @@ const RoundedButton = ({style, textStyle, onPress, children, loading}) => {
 
   return (
     <TouchableOpacity
-      onPress={onPress}
+      onPress={() => !loading ? onPress() : null}
       style={btnStyle}
     >
       {renderContent(children, textStyle, loading)}
