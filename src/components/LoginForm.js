@@ -45,19 +45,12 @@ class LoginForm extends Component {
         source={require('../assets/background.png')}
         style={pageStyle}>
 
-        <StatusBar barStyle='default'
+        <StatusBar barStyle='light-content'
                    translucent={true}
                    backgroundColor={'rgba(0, 0, 0, 0.1)'}/>
 
         <KeyboardAvoidingView behavior='padding'>
           <Card style={loginFormStyle}>
-
-            <CardSection style={iconContainerStyle}>
-              <Image
-                source={require('../assets/lock.png')}
-                style={iconStyle}
-              />
-            </CardSection>
 
             <CardSection>
               <MaterialInput
@@ -71,6 +64,7 @@ class LoginForm extends Component {
                 onChangeText={this.props.emailChanged}
                 autoCorrect={false}
                 keyboardType='email-address'
+                autoCapitalize='none'
               />
             </CardSection>
 
@@ -131,7 +125,9 @@ const styles = {
   loginFormStyle: {
     width: 300,
     backgroundColor: 'white',
-    alignSelf: 'center'
+    alignSelf: 'center',
+    paddingTop: 0,
+    paddingBottom: 25
   },
   iconContainerStyle: {
     justifyContent: 'center'
