@@ -9,7 +9,7 @@ export const AUTH_LOGIN_FAILED = 'auth_login_failed'
 
 export const AUTH_RESET_ERROR = 'AUTH_RESET_ERROR'
 
-export const AUTH_LOGOUT = 'auth_login'
+export const AUTH_LOGOUT = 'auth_logout'
 
 import { NavigationActions } from 'react-navigation'
 
@@ -45,22 +45,22 @@ export const loginUser = ({email, password}) => {
 const onLoginSuccess = (dispatch, {data}) => {
   const {token} = data.data.attributes
   dispatch({type: AUTH_LOGIN_SUCCESS, payload: token})
-    dispatch(NavigationActions.reset({
-        index : 0,
-        actions : [
-            NavigationActions.navigate( {routeName : 'Main'})
-        ]
-    }))
+  dispatch(NavigationActions.reset({
+    index: 0,
+    actions: [
+      NavigationActions.navigate({routeName: 'Main'})
+    ]
+  }))
 }
 
 export const logoutUser = () => {
   return (dispatch) => {
     dispatch({type: AUTH_LOGOUT})
-      dispatch(NavigationActions.reset({
-          index : 0,
-          actions : [
-              NavigationActions.navigate( {routeName : 'Auth'})
-          ]
-      }))
+    dispatch(NavigationActions.reset({
+      index: 0,
+      actions: [
+        NavigationActions.navigate({routeName: 'Auth'})
+      ]
+    }))
   }
 }
