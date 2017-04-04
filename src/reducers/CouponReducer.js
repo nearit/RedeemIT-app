@@ -31,10 +31,10 @@ export default (state = INITIAL_STATE, action) => {
       return {...state, loading: true, error: false, redeemStatus: null}
 
     case COUPON_REDEEM_SUCCESS:
-      return {...state, ...INITIAL_STATE, error: false, redeemStatus: 'CODICE COUPON ASSOCIATO CON SUCCESSO'}
+      return {...state, loading: false, error: false, redeemStatus: 'CODICE COUPON ASSOCIATO CON SUCCESSO'}
 
     case COUPON_REDEEM_FAILED:
-      return {...state, ...INITIAL_STATE, error: true, redeemStatus: 'IMPOSSIBILE APPLICARE IL COUPON'}
+      return {...state, loading: false, error: true, redeemStatus: 'IMPOSSIBILE APPLICARE IL COUPON'}
 
     case COUPON_RESET:
       return {...INITIAL_STATE}

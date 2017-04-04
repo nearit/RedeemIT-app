@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import { StatusBar, Text, BackAndroid } from 'react-native'
+import { StatusBar, View, Text, BackAndroid } from 'react-native'
 import Camera from 'react-native-camera'
+import Spinner from 'react-native-spinkit'
 import { connect } from 'react-redux'
 import { BorderView, CardSection, FooterBar, IconButton } from './common'
 import { logoutUser, couponDetected } from '../actions'
@@ -39,6 +40,20 @@ class CameraView extends Component {
     }
   }
 
+  renderLoader () {
+    const {loading} = this.props
+
+    if (loading) {
+      return (
+        <Spinner
+          type='Pulse'
+          color='#9f92ff'
+          size={150}
+        />
+      )
+    }
+  }
+
   render () {
     const {
       PageStyle,
@@ -63,7 +78,9 @@ class CameraView extends Component {
         </CardSection>
 
         <CardSection style={ViewFinderContainerStyle}>
-          <BorderView style={ViewFinderStyle}/>
+          <BorderView style={ViewFinderStyle}>
+            {this.renderLoader()}
+          </BorderView>
         </CardSection>
 
         <FooterBar>
@@ -107,16 +124,16 @@ const styles = {
   ViewFinderStyle: {
     alignSelf: 'center',
     width: 300,
-    height: 300
+    height: 300,
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 }
 
 const mapStateToProps = ({coupon}) => {
-  const {serialCode} = coupon
+  const {serialCode, loading} = coupon
 
-  return {
-    serialCode
-  }
+  return {serialCode, loading}
 }
 
 export default connect(mapStateToProps, {logoutUser, couponDetected})(CameraView)
