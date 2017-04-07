@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { StatusBar, View, Text, BackAndroid } from 'react-native'
+import { StatusBar, Text, BackAndroid } from 'react-native'
 import Camera from 'react-native-camera'
 import Spinner from 'react-native-spinkit'
 import { connect } from 'react-redux'

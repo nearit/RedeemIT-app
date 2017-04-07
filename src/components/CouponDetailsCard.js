@@ -3,7 +3,7 @@ import { View, Text, Image } from 'react-native'
 import moment from 'moment'
 import { Card, CardSection, NrtImage } from '../components/common'
 
-const renderValidityPeriod = ({redeemable, expired, redeemable_from, expires_at}) => {
+const renderValidityPeriod = ({expired, redeemable_from, expires_at}) => {
   const {validitySectionStyle, validityTextStyle, validityErrorStyle} = styles
 
   let textStyle = [validityTextStyle]
@@ -18,7 +18,7 @@ const renderValidityPeriod = ({redeemable, expired, redeemable_from, expires_at}
     validity_period_text = validity_period_text + 'fino al ' + moment(expires_at).format('DD/MM/YYYY')
   }
 
-  if (!redeemable || expired) {
+  if (expired) {
     textStyle.push(validityErrorStyle)
   }
 
@@ -47,26 +47,6 @@ const renderCouponDescription = ({redeemable, description}) => {
   }
 }
 
-const renderCouponBottomFiller = ({redeemed}) => {
-  if (redeemed) {
-    return (
-      <CardSection>
-        <Image
-          source={require('../assets/trapezio-bottom-used.png')}
-        />
-      </CardSection>
-    )
-  }
-
-  return (
-    <CardSection>
-      <Image
-        source={require('../assets/trapezio-bottom.png')}
-      />
-    </CardSection>
-  )
-}
-
 const renderCouponStatusSection = ({expired, redeemed, redeemable}) => {
   const {statusSectionStyle, statusTextStyle, successStatusTextStyle} = styles
 
@@ -83,7 +63,7 @@ const renderCouponStatusSection = ({expired, redeemed, redeemable}) => {
       <View>
         <CardSection>
           <Image
-            source={require('../assets/trapezio-top.png')}
+            source={require('../assets/coupon-border-lower.png')}
           />
         </CardSection>
 
@@ -99,7 +79,7 @@ const renderCouponStatusSection = ({expired, redeemed, redeemable}) => {
       <View>
         <CardSection>
           <Image
-            source={require('../assets/trapezio-top.png')}
+            source={require('../assets/coupon-border-lower.png')}
           />
         </CardSection>
 
@@ -114,7 +94,7 @@ const renderCouponStatusSection = ({expired, redeemed, redeemable}) => {
     <View>
       <CardSection>
         <Image
-          source={require('../assets/trapezio-top.png')}
+          source={require('../assets/coupon-border-lower.png')}
         />
       </CardSection>
 
@@ -160,7 +140,11 @@ const CouponDetailsCard = (props) => {
 
       {renderCouponDescription(coupon)}
 
-      {renderCouponBottomFiller(coupon)}
+      <CardSection>
+        <Image
+          source={require('../assets/coupon-border-upper.png')}
+        />
+      </CardSection>
 
       {renderCouponStatusSection(coupon)}
 
