@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { StatusBar, View, Image, BackAndroid } from 'react-native'
+import I18n from 'react-native-i18n'
 import { connect } from 'react-redux'
 import { couponReset, couponRedeem } from '../actions'
 import { Spacer, FooterBar, IconButton } from '../components/common'
@@ -46,7 +47,7 @@ class CouponDetails extends Component {
         <FooterBar>
           <IconButton
             onPress={this.onCancelButtonPressed.bind(this)}
-            label='Chiudi'
+            label={I18n.t('close')}
             icon={require('../assets/close.png')}
           />
         </FooterBar>
@@ -57,14 +58,14 @@ class CouponDetails extends Component {
       <FooterBar>
         <IconButton
           onPress={this.onRedeemButtonPressed.bind(this)}
-          label='Applica coupon'
+          label={I18n.t('apply_coupon')}
           style={{backgroundColor: '#68c600'}}
           labelStyle={{color: 'white'}}
         />
 
         <IconButton
           onPress={this.onCancelButtonPressed.bind(this)}
-          label='Non applicare'
+          label={I18n.t('dont_apply_coupon')}
         />
       </FooterBar>
     )

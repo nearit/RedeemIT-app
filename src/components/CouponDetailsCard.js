@@ -1,5 +1,6 @@
 import React from 'react'
 import { View, Text, Image } from 'react-native'
+import I18n from 'react-native-i18n'
 import moment from 'moment'
 import { Card, CardSection, NrtImage } from '../components/common'
 
@@ -11,11 +12,11 @@ const renderValidityPeriod = ({expired, redeemable_from, expires_at}) => {
   let validity_period_text = ''
 
   if (redeemable_from) {
-    validity_period_text = 'dal ' + moment(redeemable_from).format('DD/MM/YYYY') + ' '
+    validity_period_text = I18n.t('from') + ' ' + moment(redeemable_from).format('DD/MM/YYYY') + ' '
   }
 
   if (expires_at) {
-    validity_period_text = validity_period_text + 'fino al ' + moment(expires_at).format('DD/MM/YYYY')
+    validity_period_text = validity_period_text + I18n.t('to') + ' ' + moment(expires_at).format('DD/MM/YYYY')
   }
 
   if (expired) {
@@ -25,7 +26,7 @@ const renderValidityPeriod = ({expired, redeemable_from, expires_at}) => {
   return (
     <View>
       <CardSection style={validitySectionStyle}>
-        <Text style={textStyle}>Validità:</Text>
+        <Text style={textStyle}>{I18n.t('validity')}:</Text>
       </CardSection>
 
       <CardSection style={[validitySectionStyle, {paddingBottom: 25}]}>
@@ -53,7 +54,7 @@ const renderCouponStatusSection = ({expired, redeemed, redeemable}) => {
   if (redeemed) {
     return (
       <CardSection style={statusSectionStyle}>
-        <Text style={statusTextStyle}>COUPON GIA' UTILIZZATO</Text>
+        <Text style={statusTextStyle}>{I18n.t('coupon_code_redeemed')}</Text>
       </CardSection>
     )
   }
@@ -68,7 +69,7 @@ const renderCouponStatusSection = ({expired, redeemed, redeemable}) => {
         </CardSection>
 
         <CardSection style={[statusSectionStyle, {backgroundColor: 'white'}]}>
-          <Text style={statusTextStyle}>COUPON NON ATTIVO</Text>
+          <Text style={statusTextStyle}>{I18n.t('coupon_inactive')}</Text>
         </CardSection>
       </View>
     )
@@ -84,7 +85,7 @@ const renderCouponStatusSection = ({expired, redeemed, redeemable}) => {
         </CardSection>
 
         <CardSection style={statusSectionStyle}>
-          <Text style={statusTextStyle}>COUPON SCADUTO</Text>
+          <Text style={statusTextStyle}>{I18n.t('coupon_expired')}</Text>
         </CardSection>
       </View>
     )
@@ -99,7 +100,7 @@ const renderCouponStatusSection = ({expired, redeemed, redeemable}) => {
       </CardSection>
 
       <CardSection style={[statusSectionStyle, {backgroundColor: 'white'}]}>
-        <Text style={[statusTextStyle, successStatusTextStyle]}>CODICE COUPON VALIDO</Text>
+        <Text style={[statusTextStyle, successStatusTextStyle]}>{I18n.t('invalid_coupon_code')}</Text>
       </CardSection>
     </View>
   )

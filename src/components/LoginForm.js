@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { StatusBar, KeyboardAvoidingView, Image } from 'react-native'
 import { connect } from 'react-redux'
 import { email } from 'react-native-communications'
+import I18n from 'react-native-i18n'
 import { Card, CardSection, MaterialInput, LinkText, RoundedButton } from './common'
 import { emailChanged, passwordChanged, loginUser } from '../actions'
 import SnackBar from 'react-native-snackbar-component'
@@ -26,8 +27,6 @@ class LoginForm extends Component {
     const {
       pageStyle,
       loginFormStyle,
-      iconContainerStyle,
-      iconStyle,
       linkContainerStyle,
       linkTextStyle,
       buttonContainerStyle
@@ -87,7 +86,7 @@ class LoginForm extends Component {
                 style={linkTextStyle}
                 onPress={this.openPasswordRecoveryPage.bind(this)}
               >
-                Hai dimenticato la password?
+                {I18n.t('forgot_password')}
               </LinkText>
             </CardSection>
 
@@ -104,7 +103,7 @@ class LoginForm extends Component {
           </Card>
         </KeyboardAvoidingView>
 
-        <SnackBar visible={error} textMessage={error} backgroundColor="#E91832"/>
+        <SnackBar visible={error} textMessage={I18n.t('wrong_credentials')} backgroundColor="#E91832"/>
 
       </Image>
     )

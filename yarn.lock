@@ -2969,6 +2969,10 @@ react-native-drawer-layout@1.2.0:
   dependencies:
     react-native-dismiss-keyboard "1.0.0"
 
+react-native-i18n@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/react-native-i18n/-/react-native-i18n-1.0.0.tgz#0c407d9ebb846aae1aa5e05de6503008553f02fd"
+
 react-native-material-textfield@^0.2.4:
   version "0.2.4"
   resolved "https://registry.yarnpkg.com/react-native-material-textfield/-/react-native-material-textfield-0.2.4.tgz#1dda02f521ae784f5915622e5f7a2e1671dae7f3"

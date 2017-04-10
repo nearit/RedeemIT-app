@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { StatusBar, Text, BackAndroid } from 'react-native'
 import Camera from 'react-native-camera'
 import Spinner from 'react-native-spinkit'
+import I18n from 'react-native-i18n'
 import { connect } from 'react-redux'
 import { BorderView, CardSection, FooterBar, IconButton } from './common'
 import { logoutUser, couponDetected } from '../actions'
@@ -74,7 +75,7 @@ class CameraView extends Component {
                    backgroundColor={'rgba(0, 0, 0, 0.1)'}/>
 
         <CardSection style={HintContainerStyle}>
-          <Text style={HintStyle}>Inquadra il QR code con la fotocamera</Text>
+          <Text style={HintStyle}>{I18n.t('qr_code_hint')}</Text>
         </CardSection>
 
         <CardSection style={ViewFinderContainerStyle}>
@@ -86,7 +87,7 @@ class CameraView extends Component {
         <FooterBar>
           <IconButton
             onPress={this.onLogoutPress.bind(this)}
-            label='Logout'
+            label={I18n.t('logout')}
             icon={require('../assets/unlock.png')}
           />
         </FooterBar>

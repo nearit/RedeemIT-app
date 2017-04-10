@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { StatusBar, View, Image, Text, BackAndroid } from 'react-native'
+import I18n from 'react-native-i18n'
 import { connect } from 'react-redux'
 import { BorderView, CardSection, RoundedButton } from '../components/common'
 import { couponReset } from '../actions'
@@ -60,7 +61,7 @@ class CouponResult extends Component {
           textStyle={actionButtonLabelStyle}
           onPress={this.onButtonPressed.bind(this)}
         >
-          RIPROVA
+          {I18n.t('retry')}
         </RoundedButton>
       )
     }
@@ -71,7 +72,7 @@ class CouponResult extends Component {
         textStyle={actionButtonLabelStyle}
         onPress={this.onButtonPressed.bind(this)}
       >
-        OK
+        {I18n.t('ok')}
       </RoundedButton>
     )
   }

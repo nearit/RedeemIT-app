@@ -1,3 +1,4 @@
+import I18n from 'react-native-i18n'
 import {
   COUPON_DETECTED,
   COUPON_DETECTED_SUCCESS,
@@ -25,16 +26,16 @@ export default (state = INITIAL_STATE, action) => {
       return {...state, loading: false, error: false, couponDetails: action.payload, redeemStatus: null}
 
     case COUPON_DETECTED_FAILED:
-      return {...state, ...INITIAL_STATE, error: true, redeemStatus: 'CODICE COUPON NON VALIDO'}
+      return {...state, ...INITIAL_STATE, error: true, redeemStatus: I18n.t('invalid_coupon_code')}
 
     case COUPON_REDEEM:
       return {...state, loading: true, error: false, redeemStatus: null}
 
     case COUPON_REDEEM_SUCCESS:
-      return {...state, loading: false, error: false, redeemStatus: 'CODICE COUPON ASSOCIATO CON SUCCESSO'}
+      return {...state, loading: false, error: false, redeemStatus: I18n.t('coupon_code_applied')}
 
     case COUPON_REDEEM_FAILED:
-      return {...state, loading: false, error: true, redeemStatus: 'IMPOSSIBILE APPLICARE IL COUPON'}
+      return {...state, loading: false, error: true, redeemStatus: I18n.t('cant_apply_coupon_code')}
 
     case COUPON_RESET:
       return {...INITIAL_STATE}

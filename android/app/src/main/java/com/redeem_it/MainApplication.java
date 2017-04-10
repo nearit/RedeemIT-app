@@ -3,6 +3,7 @@ package com.redeem_it;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.i18n.reactnativei18n.ReactNativeI18n;
 import com.react.rnspinkit.RNSpinkitPackage;
 import com.lwansbrough.RCTCamera.RCTCameraPackage;
 import com.facebook.react.ReactNativeHost;
@@ -25,6 +26,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new ReactNativeI18n(),
             new RNSpinkitPackage(),
             new RCTCameraPackage()
       );
