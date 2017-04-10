@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>it_IT</string>
 	<key>CFBundleDisplayName</key>
-	<string>redeemIT</string>
+	<string>RedeemIT</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
