@@ -1,4 +1,4 @@
-package com.redeem_it;
+package com.nearit.redeem_it;
 
 import android.app.Application;
 
