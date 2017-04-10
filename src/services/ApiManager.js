@@ -1,8 +1,9 @@
+import { NRT_API_URL } from 'react-native-dotenv'
 import axios from 'axios'
 import Store from '../Store'
 import JsonApiUtils from './serializers/jsonApiUtils'
 
-const baseURL = __DEV__ ? 'https://dev-api.nearit.com' : 'https://api.nearit.com'
+const baseURL = NRT_API_URL
 
 const apiManager = axios.create({
   baseURL,
