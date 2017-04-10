@@ -124,6 +124,7 @@ const CouponDetailsCard = (props) => {
 
       <CardSection style={iconSectionStyle}>
         <NrtImage
+          defaultImage={require('../assets/coupon-default.png')}
           imageId={coupon.icon_id}
           style={iconStyle}
         />
