@@ -100,7 +100,7 @@ const renderCouponStatusSection = ({expired, redeemed, redeemable}) => {
       </CardSection>
 
       <CardSection style={[statusSectionStyle, {backgroundColor: 'white'}]}>
-        <Text style={[statusTextStyle, successStatusTextStyle]}>{I18n.t('invalid_coupon_code')}</Text>
+        <Text style={[statusTextStyle, successStatusTextStyle]}>{I18n.t('valid_coupon_code')}</Text>
       </CardSection>
     </View>
   )
@@ -183,6 +183,7 @@ const styles = {
     backgroundColor: 'white'
   },
   titleStyle: {
+    color: 'black',
     fontSize: 20,
     fontWeight: 'bold'
   },
@@ -194,6 +195,7 @@ const styles = {
     backgroundColor: 'white'
   },
   valueStyle: {
+    color: 'black',
     fontSize: 18,
     fontWeight: 'bold',
     lineHeight: 18
@@ -204,6 +206,7 @@ const styles = {
     backgroundColor: 'white'
   },
   validityTextStyle: {
+    color: 'black',
     fontSize: 13,
     lineHeight: 17
   },
@@ -217,6 +220,7 @@ const styles = {
     backgroundColor: 'white'
   },
   descriptionTextStyle: {
+    color: 'black',
     fontSize: 15,
     lineHeight: 18
   },
