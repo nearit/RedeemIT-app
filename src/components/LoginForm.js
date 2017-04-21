@@ -29,7 +29,8 @@ class LoginForm extends Component {
       loginFormStyle,
       linkContainerStyle,
       linkTextStyle,
-      buttonContainerStyle
+      buttonContainerStyle,
+      buttonTextStyle
     } = styles
 
     const {
@@ -94,6 +95,7 @@ class LoginForm extends Component {
               <RoundedButton
                 onPress={this.onLoginPress.bind(this)}
                 loading={loading}
+                textStyle={buttonTextStyle}
               >
                 OK
               </RoundedButton>
@@ -142,13 +144,15 @@ const styles = {
   },
   linkTextStyle: {
     alignSelf: 'flex-start',
-    fontSize: 14,
-    fontWeight: '600',
-    fontStyle: 'italic'
+    fontFamily: 'Asap-MediumItalic',
+    fontSize: 14
   },
   buttonContainerStyle: {
     height: 50,
     alignSelf: 'center'
+  },
+  buttonTextStyle: {
+    fontFamily: 'Asap-Bold'
   }
 }
 

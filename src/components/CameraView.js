@@ -61,7 +61,8 @@ class CameraView extends Component {
       HintContainerStyle,
       HintStyle,
       ViewFinderContainerStyle,
-      ViewFinderStyle
+      ViewFinderStyle,
+      LogoutButtonLabelStyle
     } = styles
 
     return (
@@ -88,6 +89,7 @@ class CameraView extends Component {
           <IconButton
             onPress={this.onLogoutPress.bind(this)}
             label={I18n.t('logout')}
+            labelStyle={LogoutButtonLabelStyle}
             icon={require('../assets/unlock.png')}
           />
         </FooterBar>
@@ -113,8 +115,8 @@ const styles = {
   HintStyle: {
     alignSelf: 'center',
     color: 'white',
+    fontFamily: 'Asap-Bold',
     fontSize: 20,
-    fontWeight: 'bold',
     paddingRight: 20,
     paddingLeft: 20,
     textAlign: 'center'
@@ -128,6 +130,9 @@ const styles = {
     height: 300,
     alignItems: 'center',
     justifyContent: 'center'
+  },
+  LogoutButtonLabelStyle: {
+    fontFamily: 'Asap-Bold'
   }
 }
 

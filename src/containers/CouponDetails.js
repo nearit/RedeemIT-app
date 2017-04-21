@@ -60,12 +60,13 @@ class CouponDetails extends Component {
           onPress={this.onRedeemButtonPressed.bind(this)}
           label={I18n.t('apply_coupon')}
           style={{backgroundColor: '#68c600'}}
-          labelStyle={{color: 'white'}}
+          labelStyle={{fontFamily: 'Asap-Bold', color: 'white'}}
         />
 
         <IconButton
           onPress={this.onCancelButtonPressed.bind(this)}
           label={I18n.t('dont_apply_coupon')}
+          labelStyle={{fontFamily: 'Asap-Bold'}}
         />
       </FooterBar>
     )
@@ -136,8 +137,8 @@ const styles = {
   },
   resultTextStyle: {
     color: 'white',
+    fontFamily: 'Asap-Bold',
     fontSize: 20,
-    fontWeight: 'bold',
     textAlign: 'center'
   },
   actionButtonStyle: {

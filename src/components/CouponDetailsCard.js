@@ -184,8 +184,8 @@ const styles = {
   },
   titleStyle: {
     color: 'black',
-    fontSize: 20,
-    fontWeight: 'bold'
+    fontFamily: 'Asap-Bold',
+    fontSize: 20
   },
   valueSectionStyle: {
     paddingTop: 20,
@@ -196,8 +196,8 @@ const styles = {
   },
   valueStyle: {
     color: 'black',
+    fontFamily: 'Asap-Bold',
     fontSize: 18,
-    fontWeight: 'bold',
     lineHeight: 18
   },
   validitySectionStyle: {
@@ -207,6 +207,7 @@ const styles = {
   },
   validityTextStyle: {
     color: 'black',
+    fontFamily: 'Asap-Regular',
     fontSize: 13,
     lineHeight: 17
   },
@@ -221,6 +222,7 @@ const styles = {
   },
   descriptionTextStyle: {
     color: 'black',
+    fontFamily: 'Asap-Regular',
     fontSize: 15,
     lineHeight: 18
   },
@@ -233,8 +235,8 @@ const styles = {
   statusTextStyle: {
     flex: 1,
     color: '#e91832',
+    fontFamily: 'Asap-Bold',
     fontSize: 18,
-    fontWeight: 'bold',
     textAlign: 'center',
     lineHeight: 27
   },

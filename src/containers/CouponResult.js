@@ -154,8 +154,8 @@ const styles = {
   },
   resultTextStyle: {
     color: 'white',
+    fontFamily: 'Asap-Bold',
     fontSize: 20,
-    fontWeight: 'bold',
     textAlign: 'center'
   },
   actionButtonStyle: {
@@ -165,7 +165,8 @@ const styles = {
     backgroundColor: 'white'
   },
   actionButtonLabelStyle: {
-    color: 'black'
+    color: 'black',
+    fontFamily: 'Asap-Bold'
   }
 }
 
