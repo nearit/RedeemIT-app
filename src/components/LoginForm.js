@@ -3,7 +3,13 @@ import { StatusBar, KeyboardAvoidingView, Image } from 'react-native'
 import { connect } from 'react-redux'
 import { email } from 'react-native-communications'
 import I18n from 'react-native-i18n'
-import { Card, CardSection, MaterialInput, LinkText, RoundedButton } from './common'
+import {
+  Card,
+  CardSection,
+  MaterialInput,
+  LinkText,
+  RoundedButton
+} from './common'
 import { emailChanged, passwordChanged, loginUser } from '../actions'
 import SnackBar from 'react-native-snackbar-component'
 
@@ -14,13 +20,13 @@ class LoginForm extends Component {
   }
 
   onLoginPress () {
-    const {email, password} = this.props
+    const { email, password } = this.props
 
     // Release focus from fields
     this.emailField.blur()
     this.passwordField.blur()
 
-    this.props.loginUser({email, password})
+    this.props.loginUser({ email, password })
   }
 
   render () {
@@ -47,11 +53,11 @@ class LoginForm extends Component {
 
         <StatusBar barStyle='light-content'
                    translucent={true}
-                   backgroundColor={'rgba(0, 0, 0, 0.1)'}/>
+                   backgroundColor={'rgba(0, 0, 0, 0.1)'} />
 
-        <KeyboardAvoidingView behavior='padding'>
-          <Card style={loginFormStyle}>
+        <Card style={loginFormStyle}>
 
+          <KeyboardAvoidingView behavior='padding'>
             <CardSection>
               <MaterialInput
                 internalRef={(input) => {
@@ -81,31 +87,30 @@ class LoginForm extends Component {
                 secureTextEntry
               />
             </CardSection>
+          </KeyboardAvoidingView>
 
-            <CardSection style={linkContainerStyle}>
-              <LinkText
-                style={linkTextStyle}
-                onPress={this.openPasswordRecoveryPage.bind(this)}
-              >
-                {I18n.t('forgot_password')}
-              </LinkText>
-            </CardSection>
+          <CardSection style={linkContainerStyle}>
+            <LinkText
+              style={linkTextStyle}
+              onPress={this.openPasswordRecoveryPage.bind(this)}
+            >
+              {I18n.t('forgot_password')}
+            </LinkText>
+          </CardSection>
 
-            <CardSection style={buttonContainerStyle}>
-              <RoundedButton
-                onPress={this.onLoginPress.bind(this)}
-                loading={loading}
-                textStyle={buttonTextStyle}
-              >
-                OK
-              </RoundedButton>
+          <CardSection style={buttonContainerStyle}>
+            <RoundedButton
+              onPress={this.onLoginPress.bind(this)}
+              loading={loading}
+              textStyle={buttonTextStyle}
+            >
+              OK
+            </RoundedButton>
+          </CardSection>
+        </Card>
 
-
-            </CardSection>
-          </Card>
-        </KeyboardAvoidingView>
-
-        <SnackBar visible={error} textMessage={I18n.t('wrong_credentials')} backgroundColor="#E91832"/>
+        <SnackBar visible={error} textMessage={I18n.t('wrong_credentials')}
+                  backgroundColor="#E91832" />
 
       </Image>
     )
@@ -156,10 +161,10 @@ const styles = {
   }
 }
 
-const mapStateToProps = ({auth}) => {
-  const {email, password, error, loading} = auth
+const mapStateToProps = ({ auth }) => {
+  const { email, password, error, loading } = auth
 
-  return {email, password, error, loading}
+  return { email, password, error, loading }
 }
 
 const mapActionsToProps = {
