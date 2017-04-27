@@ -14,13 +14,13 @@ class CouponDetails extends Component {
   }
 
   onRedeemButtonPressed () {
-    const {serialCode, couponRedeem} = this.props
+    const { serialCode, couponRedeem } = this.props
 
     couponRedeem(serialCode)
   }
 
   onCancelButtonPressed () {
-    const {couponReset} = this.props
+    const { couponReset } = this.props
 
     couponReset()
   }
@@ -40,7 +40,7 @@ class CouponDetails extends Component {
   }
 
   renderButtons () {
-    const {couponDetails} = this.props
+    const { couponDetails } = this.props
 
     if (!couponDetails.redeemable) {
       return (
@@ -59,21 +59,21 @@ class CouponDetails extends Component {
         <IconButton
           onPress={this.onRedeemButtonPressed.bind(this)}
           label={I18n.t('apply_coupon')}
-          style={{backgroundColor: '#68c600'}}
-          labelStyle={{fontFamily: 'Asap-Bold', color: 'white'}}
+          style={{ backgroundColor: '#68c600' }}
+          labelStyle={{ fontFamily: 'Asap-Bold', color: 'white' }}
         />
 
         <IconButton
           onPress={this.onCancelButtonPressed.bind(this)}
           label={I18n.t('dont_apply_coupon')}
-          labelStyle={{fontFamily: 'Asap-Bold'}}
+          labelStyle={{ fontFamily: 'Asap-Bold' }}
         />
       </FooterBar>
     )
   }
 
   render () {
-    const {couponDetails} = this.props
+    const { couponDetails } = this.props
     const {
       pageStyle,
       overlayStyle
@@ -87,15 +87,13 @@ class CouponDetails extends Component {
 
         <StatusBar barStyle='light-content'
                    translucent={true}
-                   backgroundColor={'rgba(0, 0, 0, 0.1)'}/>
+                   backgroundColor={'rgba(0, 0, 0, 0.1)'} />
 
         <View style={overlayStyle}>
-          <Spacer />
-
           <CouponDetailsCard
             coupon={couponDetails}
             onCancelPress={this.onCancelButtonPressed.bind(this)}
-            style={{flex: 2, alignItems: 'center', justifyContent: 'center'}}
+            style={{ flex: 1 }}
           />
 
           {this.renderButtons()}
@@ -115,8 +113,9 @@ const styles = {
   overlayStyle: {
     flex: 1,
     flexDirection: 'column',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     alignItems: 'center',
+    paddingTop: 40,
     backgroundColor: '#000D'
   },
   baseResultContainerStyle: {
@@ -152,10 +151,13 @@ const styles = {
   }
 }
 
-const mapStateToProps = ({coupon}) => {
-  const {error, serialCode, couponDetails, redeemStatus} = coupon
+const mapStateToProps = ({ coupon }) => {
+  const { error, serialCode, couponDetails, redeemStatus } = coupon
 
-  return {error, serialCode, couponDetails, redeemStatus}
+  return { error, serialCode, couponDetails, redeemStatus }
 }
 
-export default connect(mapStateToProps, {couponReset, couponRedeem})(CouponDetails)
+export default connect(mapStateToProps, {
+  couponReset,
+  couponRedeem
+})(CouponDetails)

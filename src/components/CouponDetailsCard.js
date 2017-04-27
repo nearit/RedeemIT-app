@@ -171,8 +171,8 @@ const styles = {
     paddingTop: 30
   },
   iconStyle: {
-    width: 100,
-    height: 100,
+    width: 80,
+    height: 80,
     borderWidth: 1,
     borderColor: '#333333'
   },
@@ -198,7 +198,7 @@ const styles = {
     color: 'black',
     fontFamily: 'Asap-Bold',
     fontSize: 18,
-    lineHeight: 18
+    lineHeight: 21
   },
   validitySectionStyle: {
     paddingLeft: 25,
@@ -224,7 +224,7 @@ const styles = {
     color: 'black',
     fontFamily: 'Asap-Regular',
     fontSize: 15,
-    lineHeight: 18
+    lineHeight: 20
   },
   statusSectionStyle: {
     paddingTop: 20,

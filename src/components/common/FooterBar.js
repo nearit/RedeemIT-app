@@ -15,7 +15,11 @@ const FooterBar = ({children}) => {
 
 const styles = {
   ContainerStyle: {
-    flex: 1
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    flex: 1,
+    elevation: 5
   }
 }
 
