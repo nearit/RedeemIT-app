@@ -5,4 +5,14 @@
 
   <!-- These are added by React Native for debug mode, but actually aren't needed in release mode -->
   <uses-permission tools:node="remove" android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+  <uses-permission tools:node="remove" android:name="android.permission.READ_PHONE_STATE" />
+
+  <!-- These are added by React Native Camera, but actually aren't needed -->
+  <uses-permission tools:node="remove" android:name="android.permission.RECORD_AUDIO" />
+  <uses-permission tools:node="remove" android:name="android.permission.RECORD_VIDEO" />
+  <uses-permission tools:node="remove" android:name="android.permission.READ_EXTERNAL_STORAGE" />
+  <uses-permission tools:node="remove" android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+  <!-- Camera is strictly required by our App -->
+  <uses-feature android:name="android.hardware.camera" android:required="true" />
 </manifest>
