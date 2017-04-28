@@ -9,26 +9,6 @@ import { logoutUser, couponDetected } from '../actions'
 
 class CameraView extends Component {
 
-  constructor (props) {
-    super(props)
-
-    this.handleBack = this.handleBack.bind(this)
-  }
-
-  componentDidMount () {
-    BackAndroid.addEventListener('hardwareBackPress', this.handleBack)
-  }
-
-  componentWillUnmount () {
-    //Forgetting to remove the listener will cause pop executes multiple times
-    BackAndroid.removeEventListener('hardwareBackPress', this.handleBack)
-  }
-
-  handleBack () {
-    this.onLogoutPress()
-    return true
-  }
-
   onLogoutPress () {
     this.props.logoutUser()
   }
