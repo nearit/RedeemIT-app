@@ -2,12 +2,15 @@ import React from 'react'
 import I18n from 'react-native-i18n'
 import { Provider } from 'react-redux'
 import Store from './Store'
+import NetworkInfoProvider from './components/NetworkInfoProvider'
 import AppWithNavigationState from './Router'
 
 const App = () => {
   return (
     <Provider store={Store}>
-      <AppWithNavigationState />
+      <NetworkInfoProvider>
+        <AppWithNavigationState />
+      </NetworkInfoProvider>
     </Provider>
   )
 }
