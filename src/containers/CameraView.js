@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { StatusBar, Text, BackAndroid } from 'react-native'
+import { StatusBar, View, Text } from 'react-native'
 import Camera from 'react-native-camera'
 import Spinner from 'react-native-spinkit'
 import I18n from 'react-native-i18n'
@@ -12,6 +12,7 @@ import {
   Spacer
 } from '../components/common'
 import NetworkStateBanner from '../components/NetworkStateBanner'
+import CheckedCameraView from '../components/CheckedCameraView'
 import { logoutUser, couponDetected } from '../actions/index'
 
 class CameraView extends Component {
@@ -45,6 +46,7 @@ class CameraView extends Component {
   render () {
     const {
       PageStyle,
+      CameraStyle,
       HintContainerStyle,
       HintStyle,
       ViewFinderContainerStyle,
@@ -55,28 +57,31 @@ class CameraView extends Component {
     const { isConnected } = this.props
 
     return (
-      <Camera
-        style={PageStyle}
-        aspect={Camera.constants.Aspect.fill}
-        onBarCodeRead={(event) => this.onBarCodeRead(event)}>
-
+      <View style={PageStyle}>
         <StatusBar barStyle='light-content'
                    translucent={true}
                    backgroundColor={'rgba(0, 0, 0, 0.1)'} />
 
         <NetworkStateBanner isConnected={isConnected} />
 
-        <CardSection style={HintContainerStyle}>
-          <Text style={HintStyle}>{I18n.t('qr_code_hint')}</Text>
-        </CardSection>
+        <CheckedCameraView
+          style={CameraStyle}
+          aspect={Camera.constants.Aspect.fill}
+          onBarCodeRead={(event) => this.onBarCodeRead(event)}>
 
-        <CardSection style={ViewFinderContainerStyle}>
-          <BorderView style={ViewFinderStyle}>
-            {this.renderLoader()}
-          </BorderView>
-        </CardSection>
+          <CardSection style={HintContainerStyle}>
+            <Text style={HintStyle}>{I18n.t('qr_code_hint')}</Text>
+          </CardSection>
 
-        <Spacer />
+          <CardSection style={ViewFinderContainerStyle}>
+            <BorderView style={ViewFinderStyle}>
+              {this.renderLoader()}
+            </BorderView>
+          </CardSection>
+
+          <Spacer />
+
+        </CheckedCameraView>
 
         <FooterBar>
           <IconButton
@@ -86,7 +91,7 @@ class CameraView extends Component {
             icon={require('../assets/unlock.png')}
           />
         </FooterBar>
-      </Camera>
+      </View>
     )
   }
 
@@ -98,6 +103,12 @@ const styles = {
     width: undefined,
     height: undefined,
     backgroundColor: 'transparent',
+    flexDirection: 'column'
+  },
+  CameraStyle: {
+    flex: 1,
+    width: undefined,
+    height: undefined,
     flexDirection: 'column',
     justifyContent: 'space-between',
     alignItems: 'center'

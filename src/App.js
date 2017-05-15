@@ -40,7 +40,8 @@ I18n.translations = {
     validity: 'Validity',
     from: 'from',
     to: 'to',
-    network_connection_missing: 'Network connection not available'
+    network_connection_missing: 'Network connection not available',
+    camera_permission_missing: 'Missing Camera permission'
   },
   it: {
     forgot_password: 'Hai dimenticato la password?',
@@ -63,7 +64,8 @@ I18n.translations = {
     validity: 'Validità',
     from: 'dal',
     to: 'fino al',
-    network_connection_missing: 'Connessione mancante'
+    network_connection_missing: 'Connessione mancante',
+    camera_permission_missing: 'Permesso Fotocamera mancante'
   }
 }
 
