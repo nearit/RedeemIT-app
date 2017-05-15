@@ -3,7 +3,7 @@ import { Text, TouchableOpacity } from 'react-native'
 import Spinner from 'react-native-spinkit'
 
 const renderContent = (text, textStyle, isLoading) => {
-  const {textLabelStyle} = styles
+  const { textLabelStyle } = styles
 
   if (isLoading) {
     return (
@@ -21,17 +21,21 @@ const renderContent = (text, textStyle, isLoading) => {
   )
 }
 
-const RoundedButton = ({style, textStyle, onPress, children, loading}) => {
-  const {buttonStyle, buttonLoadingStyle} = styles
+const RoundedButton = ({ style, textStyle, onPress, children, loading, disabled }) => {
+  const { buttonStyle, buttonLoadingStyle, buttonDisabledStyle } = styles
 
   let btnStyle = [buttonStyle, style]
   if (loading) {
     btnStyle.push(buttonLoadingStyle)
   }
 
+  if (disabled) {
+    btnStyle.push(buttonDisabledStyle)
+  }
+
   return (
     <TouchableOpacity
-      onPress={() => !loading ? onPress() : null}
+      onPress={() => !loading && !disabled ? onPress() : null}
       style={btnStyle}
     >
       {renderContent(children, textStyle, loading)}
@@ -51,6 +55,9 @@ const styles = {
     borderRadius: 50,
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  buttonDisabledStyle: {
+    backgroundColor: '#A6B9FF',
   },
   buttonLoadingStyle: {
     width: 50

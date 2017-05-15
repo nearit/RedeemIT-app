@@ -4,7 +4,14 @@ import Camera from 'react-native-camera'
 import Spinner from 'react-native-spinkit'
 import I18n from 'react-native-i18n'
 import { connect } from 'react-redux'
-import { BorderView, CardSection, FooterBar, IconButton, Spacer } from '../components/common'
+import {
+  BorderView,
+  CardSection,
+  FooterBar,
+  IconButton,
+  Spacer
+} from '../components/common'
+import NetworkStateBanner from '../components/NetworkStateBanner'
 import { logoutUser, couponDetected } from '../actions/index'
 
 class CameraView extends Component {
@@ -13,16 +20,16 @@ class CameraView extends Component {
     this.props.logoutUser()
   }
 
-  onBarCodeRead ({data}) {
-    const {serialCode, couponDetected} = this.props
+  onBarCodeRead ({ data }) {
+    const { serialCode, isConnected, couponDetected } = this.props
 
-    if (!serialCode) {
+    if (!serialCode && isConnected) {
       couponDetected(data)
     }
   }
 
   renderLoader () {
-    const {loading} = this.props
+    const { loading } = this.props
 
     if (loading) {
       return (
@@ -45,6 +52,8 @@ class CameraView extends Component {
       LogoutButtonLabelStyle
     } = styles
 
+    const { isConnected } = this.props
+
     return (
       <Camera
         style={PageStyle}
@@ -53,7 +62,9 @@ class CameraView extends Component {
 
         <StatusBar barStyle='light-content'
                    translucent={true}
-                   backgroundColor={'rgba(0, 0, 0, 0.1)'}/>
+                   backgroundColor={'rgba(0, 0, 0, 0.1)'} />
+
+        <NetworkStateBanner isConnected={isConnected} />
 
         <CardSection style={HintContainerStyle}>
           <Text style={HintStyle}>{I18n.t('qr_code_hint')}</Text>
@@ -118,10 +129,14 @@ const styles = {
   }
 }
 
-const mapStateToProps = ({coupon}) => {
-  const {serialCode, loading} = coupon
+const mapStateToProps = ({ coupon, connection }) => {
+  const { serialCode, loading } = coupon
+  const { isConnected } = connection
 
-  return {serialCode, loading}
+  return { serialCode, loading, isConnected }
 }
 
-export default connect(mapStateToProps, {logoutUser, couponDetected})(CameraView)
+export default connect(mapStateToProps, {
+  logoutUser,
+  couponDetected
+})(CameraView)

@@ -38,7 +38,8 @@ I18n.translations = {
     close: 'Close',
     validity: 'Validity',
     from: 'from',
-    to: 'to'
+    to: 'to',
+    network_connection_missing: 'Network connection not available'
   },
   it: {
     forgot_password: 'Hai dimenticato la password?',
@@ -59,7 +60,8 @@ I18n.translations = {
     close: 'Chiudi',
     validity: 'Validità',
     from: 'dal',
-    to: 'fino al'
+    to: 'fino al',
+    network_connection_missing: 'Connessione mancante'
   }
 }
 

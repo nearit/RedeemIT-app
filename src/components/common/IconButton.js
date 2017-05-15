@@ -21,7 +21,7 @@ const renderIcon = (icon) => {
   }
 }
 
-const IconButton = ({label, icon, onPress, style, labelStyle}) => {
+const IconButton = ({label, icon, onPress, disabled, style, labelStyle}) => {
   const {
     ButtonWrapperStyle,
     ButtonStyle,
@@ -31,7 +31,7 @@ const IconButton = ({label, icon, onPress, style, labelStyle}) => {
   return (
     <View style={ButtonWrapperStyle}>
       <Button
-        onPress={onPress}
+        onPress={() => !disabled ? onPress() : null}
         style={[ButtonStyle, style]}
       >
 

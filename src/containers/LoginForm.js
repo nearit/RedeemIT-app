@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { StatusBar, KeyboardAvoidingView, Image } from 'react-native'
 import { connect } from 'react-redux'
 import { email } from 'react-native-communications'
+import SnackBar from 'react-native-snackbar-component'
 import I18n from 'react-native-i18n'
 import {
   Card,
@@ -10,8 +11,8 @@ import {
   LinkText,
   RoundedButton
 } from '../components/common/index'
+import NetworkStateBanner from '../components/NetworkStateBanner'
 import { emailChanged, passwordChanged, loginUser } from '../actions/index'
-import SnackBar from 'react-native-snackbar-component'
 
 class LoginForm extends Component {
 
@@ -43,7 +44,8 @@ class LoginForm extends Component {
       email,
       password,
       error,
-      loading
+      loading,
+      isConnected
     } = this.props
 
     return (
@@ -54,6 +56,8 @@ class LoginForm extends Component {
         <StatusBar barStyle='light-content'
                    translucent={true}
                    backgroundColor={'rgba(0, 0, 0, 0.1)'} />
+
+        <NetworkStateBanner isConnected={isConnected} />
 
         <Card style={loginFormStyle}>
 
@@ -102,6 +106,7 @@ class LoginForm extends Component {
             <RoundedButton
               onPress={this.onLoginPress.bind(this)}
               loading={loading}
+              disabled={!isConnected}
               textStyle={buttonTextStyle}
             >
               OK
@@ -161,10 +166,11 @@ const styles = {
   }
 }
 
-const mapStateToProps = ({ auth }) => {
+const mapStateToProps = ({ auth, connection }) => {
   const { email, password, error, loading } = auth
+  const { isConnected } = connection
 
-  return { email, password, error, loading }
+  return { email, password, error, loading, isConnected }
 }
 
 const mapActionsToProps = {

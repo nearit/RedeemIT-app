@@ -5,9 +5,19 @@
     android:versionName="1.0">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.VIBRATE"/>
 
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
+    <!-- These are added by React Native Camera, but actually aren't needed -->
+    <uses-permission tools:node="remove" android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission tools:node="remove" android:name="android.permission.RECORD_VIDEO" />
+    <uses-permission tools:node="remove" android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission tools:node="remove" android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <!-- Camera is strictly required by our App -->
+    <uses-feature android:name="android.hardware.camera" android:required="true" />
 
     <uses-sdk
         android:minSdkVersion="16"
