@@ -114,7 +114,8 @@ class LoginForm extends Component {
           </CardSection>
         </Card>
 
-        <SnackBar visible={error} textMessage={I18n.t('wrong_credentials')}
+        <SnackBar visible={error}
+                  textMessage={error !== null ? I18n.t(error) : ''}
                   backgroundColor="#E91832" />
 
       </Image>

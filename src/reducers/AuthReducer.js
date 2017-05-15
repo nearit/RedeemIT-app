@@ -5,7 +5,8 @@ import {
   AUTH_LOGIN_SUCCESS,
   AUTH_LOGIN_FAILED,
   AUTH_LOGOUT,
-  AUTH_RESET_ERROR
+  AUTH_RESET_ERROR,
+  AUTH_SESSION_EXPIRED
 } from '../actions'
 
 const INITIAL_STATE = {
@@ -31,9 +32,12 @@ export default (state = INITIAL_STATE, action) => {
       return {...state, ...INITIAL_STATE, token: action.payload}
 
     case AUTH_LOGIN_FAILED:
-      return {...state, password: '', loading: false, error: 'Login fallito, controlla le tue credenziali.'}
+      return {...state, password: '', loading: false, error: 'wrong_credentials'}
 
-      case AUTH_RESET_ERROR:
+    case AUTH_SESSION_EXPIRED:
+      return {...state, password: '', loading: false, error: 'session_expired'}
+
+    case AUTH_RESET_ERROR:
         return {...state, error : null}
 
     case AUTH_LOGOUT:

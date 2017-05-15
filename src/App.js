@@ -22,6 +22,7 @@ I18n.translations = {
   en: {
     forgot_password: 'Forgot password?',
     wrong_credentials: 'Login failed, please check your credentials.',
+    session_expired: 'Session expired, please login again.',
     qr_code_hint: 'Frame a QR code with the camera',
     apply_coupon: 'Apply coupon',
     valid_coupon_code: 'VALID COUPON CODE',
@@ -44,6 +45,7 @@ I18n.translations = {
   it: {
     forgot_password: 'Hai dimenticato la password?',
     wrong_credentials: 'Login fallito, controlla le tue credenziali.',
+    session_expired: 'Sessione scaduta, effettua un nuovo login.',
     qr_code_hint: 'Inquadra il QR code con la fotocamera',
     apply_coupon: 'Applica coupon',
     valid_coupon_code: 'CODICE COUPON VALIDO',
