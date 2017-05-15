@@ -1,7 +1,7 @@
 import React, { Component, Children } from 'react'
 import { View, NetInfo } from 'react-native'
 import { connect } from 'react-redux'
-import { connectionStateChanged } from '../actions'
+import { connectionStateChanged } from '../actions/index'
 
 class NetworkInfoProvider extends Component {
   constructor (props) {

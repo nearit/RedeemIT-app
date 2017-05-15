@@ -9,8 +9,8 @@ import {
   MaterialInput,
   LinkText,
   RoundedButton
-} from './common'
-import { emailChanged, passwordChanged, loginUser } from '../actions'
+} from '../components/common/index'
+import { emailChanged, passwordChanged, loginUser } from '../actions/index'
 import SnackBar from 'react-native-snackbar-component'
 
 class LoginForm extends Component {

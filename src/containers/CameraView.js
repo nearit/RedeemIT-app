@@ -4,8 +4,8 @@ import Camera from 'react-native-camera'
 import Spinner from 'react-native-spinkit'
 import I18n from 'react-native-i18n'
 import { connect } from 'react-redux'
-import { BorderView, CardSection, FooterBar, IconButton, Spacer } from './common'
-import { logoutUser, couponDetected } from '../actions'
+import { BorderView, CardSection, FooterBar, IconButton, Spacer } from '../components/common'
+import { logoutUser, couponDetected } from '../actions/index'
 
 class CameraView extends Component {
 
