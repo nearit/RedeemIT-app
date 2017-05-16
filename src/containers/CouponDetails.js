@@ -3,7 +3,7 @@ import { StatusBar, View, Image, BackAndroid } from 'react-native'
 import I18n from 'react-native-i18n'
 import { connect } from 'react-redux'
 import { couponReset, couponRedeem } from '../actions'
-import { Spacer, FooterBar, IconButton } from '../components/common'
+import { FooterBar, IconButton } from '../components/common'
 import CouponDetailsCard from '../components/CouponDetailsCard'
 import NetworkStateBanner from '../components/NetworkStateBanner'
 
@@ -95,18 +95,17 @@ class CouponDetails extends Component {
                    translucent={true}
                    backgroundColor={'rgba(0, 0, 0, 0.1)'} />
 
+        <NetworkStateBanner isConnected={isConnected} />
+
         <View style={overlayStyle}>
-
-          <NetworkStateBanner isConnected={isConnected} />
-
           <CouponDetailsCard
             coupon={couponDetails}
             onCancelPress={this.onCancelButtonPressed.bind(this)}
             style={{ flex: 1 }}
           />
-
-          {this.renderButtons()}
         </View>
+
+        {this.renderButtons()}
       </Image>
     )
   }
