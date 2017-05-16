@@ -3,8 +3,9 @@ import { StatusBar, View, Image, BackAndroid } from 'react-native'
 import I18n from 'react-native-i18n'
 import { connect } from 'react-redux'
 import { couponReset, couponRedeem } from '../actions'
-import { Spacer, FooterBar, IconButton } from '../components/common'
+import { FooterBar, IconButton } from '../components/common'
 import CouponDetailsCard from '../components/CouponDetailsCard'
+import NetworkStateBanner from '../components/NetworkStateBanner'
 
 class CouponDetails extends Component {
 
@@ -40,7 +41,7 @@ class CouponDetails extends Component {
   }
 
   renderButtons () {
-    const { couponDetails } = this.props
+    const { couponDetails, isConnected } = this.props
 
     if (!couponDetails.redeemable) {
       return (
@@ -58,6 +59,7 @@ class CouponDetails extends Component {
       <FooterBar>
         <IconButton
           onPress={this.onRedeemButtonPressed.bind(this)}
+          disabled={!isConnected}
           label={I18n.t('apply_coupon')}
           style={{ backgroundColor: '#68c600' }}
           labelStyle={{ fontFamily: 'Asap-Bold', color: 'white' }}
@@ -65,6 +67,7 @@ class CouponDetails extends Component {
 
         <IconButton
           onPress={this.onCancelButtonPressed.bind(this)}
+          disabled={!isConnected}
           label={I18n.t('dont_apply_coupon')}
           labelStyle={{ fontFamily: 'Asap-Bold' }}
         />
@@ -73,7 +76,10 @@ class CouponDetails extends Component {
   }
 
   render () {
-    const { couponDetails } = this.props
+    const {
+      couponDetails,
+      isConnected
+    } = this.props
     const {
       pageStyle,
       overlayStyle
@@ -89,15 +95,17 @@ class CouponDetails extends Component {
                    translucent={true}
                    backgroundColor={'rgba(0, 0, 0, 0.1)'} />
 
+        <NetworkStateBanner isConnected={isConnected} />
+
         <View style={overlayStyle}>
           <CouponDetailsCard
             coupon={couponDetails}
             onCancelPress={this.onCancelButtonPressed.bind(this)}
             style={{ flex: 1 }}
           />
-
-          {this.renderButtons()}
         </View>
+
+        {this.renderButtons()}
       </Image>
     )
   }
@@ -151,10 +159,11 @@ const styles = {
   }
 }
 
-const mapStateToProps = ({ coupon }) => {
+const mapStateToProps = ({ coupon, connection }) => {
   const { error, serialCode, couponDetails, redeemStatus } = coupon
+  const { isConnected } = connection
 
-  return { error, serialCode, couponDetails, redeemStatus }
+  return { error, serialCode, couponDetails, redeemStatus, isConnected }
 }
 
 export default connect(mapStateToProps, {

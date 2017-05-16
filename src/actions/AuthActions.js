@@ -9,6 +9,8 @@ export const AUTH_LOGIN_FAILED = 'auth_login_failed'
 
 export const AUTH_RESET_ERROR = 'AUTH_RESET_ERROR'
 
+export const AUTH_SESSION_EXPIRED = 'AUTH_SESSION_EXPIRED'
+
 export const AUTH_LOGOUT = 'auth_logout'
 
 import { NavigationActions } from 'react-navigation'

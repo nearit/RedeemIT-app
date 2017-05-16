@@ -1,48 +1,36 @@
 import React, { Component } from 'react'
-import { StatusBar, Text, BackAndroid } from 'react-native'
+import { StatusBar, View, Text } from 'react-native'
 import Camera from 'react-native-camera'
 import Spinner from 'react-native-spinkit'
 import I18n from 'react-native-i18n'
 import { connect } from 'react-redux'
-import { BorderView, CardSection, FooterBar, IconButton, Spacer } from './common'
-import { logoutUser, couponDetected } from '../actions'
+import {
+  BorderView,
+  CardSection,
+  FooterBar,
+  IconButton,
+  Spacer
+} from '../components/common'
+import NetworkStateBanner from '../components/NetworkStateBanner'
+import CheckedCameraView from '../components/CheckedCameraView'
+import { logoutUser, couponDetected } from '../actions/index'
 
 class CameraView extends Component {
-
-  constructor (props) {
-    super(props)
-
-    this.handleBack = this.handleBack.bind(this)
-  }
-
-  componentDidMount () {
-    BackAndroid.addEventListener('hardwareBackPress', this.handleBack)
-  }
-
-  componentWillUnmount () {
-    //Forgetting to remove the listener will cause pop executes multiple times
-    BackAndroid.removeEventListener('hardwareBackPress', this.handleBack)
-  }
-
-  handleBack () {
-    this.onLogoutPress()
-    return true
-  }
 
   onLogoutPress () {
     this.props.logoutUser()
   }
 
-  onBarCodeRead ({data}) {
-    const {serialCode, couponDetected} = this.props
+  onBarCodeRead ({ data }) {
+    const { serialCode, isConnected, couponDetected } = this.props
 
-    if (!serialCode) {
+    if (!serialCode && isConnected) {
       couponDetected(data)
     }
   }
 
   renderLoader () {
-    const {loading} = this.props
+    const { loading } = this.props
 
     if (loading) {
       return (
@@ -58,6 +46,7 @@ class CameraView extends Component {
   render () {
     const {
       PageStyle,
+      CameraStyle,
       HintContainerStyle,
       HintStyle,
       ViewFinderContainerStyle,
@@ -65,27 +54,34 @@ class CameraView extends Component {
       LogoutButtonLabelStyle
     } = styles
 
-    return (
-      <Camera
-        style={PageStyle}
-        aspect={Camera.constants.Aspect.fill}
-        onBarCodeRead={(event) => this.onBarCodeRead(event)}>
+    const { isConnected } = this.props
 
+    return (
+      <View style={PageStyle}>
         <StatusBar barStyle='light-content'
                    translucent={true}
-                   backgroundColor={'rgba(0, 0, 0, 0.1)'}/>
+                   backgroundColor={'rgba(0, 0, 0, 0.1)'} />
 
-        <CardSection style={HintContainerStyle}>
-          <Text style={HintStyle}>{I18n.t('qr_code_hint')}</Text>
-        </CardSection>
+        <NetworkStateBanner isConnected={isConnected} />
 
-        <CardSection style={ViewFinderContainerStyle}>
-          <BorderView style={ViewFinderStyle}>
-            {this.renderLoader()}
-          </BorderView>
-        </CardSection>
+        <CheckedCameraView
+          style={CameraStyle}
+          aspect={Camera.constants.Aspect.fill}
+          onBarCodeRead={(event) => this.onBarCodeRead(event)}>
 
-        <Spacer />
+          <CardSection style={HintContainerStyle}>
+            <Text style={HintStyle}>{I18n.t('qr_code_hint')}</Text>
+          </CardSection>
+
+          <CardSection style={ViewFinderContainerStyle}>
+            <BorderView style={ViewFinderStyle}>
+              {this.renderLoader()}
+            </BorderView>
+          </CardSection>
+
+          <Spacer />
+
+        </CheckedCameraView>
 
         <FooterBar>
           <IconButton
@@ -95,7 +91,7 @@ class CameraView extends Component {
             icon={require('../assets/unlock.png')}
           />
         </FooterBar>
-      </Camera>
+      </View>
     )
   }
 
@@ -107,6 +103,12 @@ const styles = {
     width: undefined,
     height: undefined,
     backgroundColor: 'transparent',
+    flexDirection: 'column'
+  },
+  CameraStyle: {
+    flex: 1,
+    width: undefined,
+    height: undefined,
     flexDirection: 'column',
     justifyContent: 'space-between',
     alignItems: 'center'
@@ -138,10 +140,14 @@ const styles = {
   }
 }
 
-const mapStateToProps = ({coupon}) => {
-  const {serialCode, loading} = coupon
+const mapStateToProps = ({ coupon, connection }) => {
+  const { serialCode, loading } = coupon
+  const { isConnected } = connection
 
-  return {serialCode, loading}
+  return { serialCode, loading, isConnected }
 }
 
-export default connect(mapStateToProps, {logoutUser, couponDetected})(CameraView)
+export default connect(mapStateToProps, {
+  logoutUser,
+  couponDetected
+})(CameraView)
