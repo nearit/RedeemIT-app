@@ -37,7 +37,7 @@ export const couponDetected = (couponSerial) => {
 
       })
       .catch((error) => {
-        if (error.response.status === 403) {
+        if (error && error.response && error.response.status && error.response.status === 403) {
           dispatch({ type: AUTH_SESSION_EXPIRED })
           dispatch(NavigationActions.reset({
             index: 0,
@@ -94,7 +94,7 @@ export const couponRedeem = (couponSerial) => {
         }))
       })
       .catch((error) => {
-        if (error.response.status === 403) {
+        if (error && error.response && error.response.status && error.response.status === 403) {
           dispatch({ type: AUTH_SESSION_EXPIRED })
           dispatch(NavigationActions.reset({
             index: 0,
