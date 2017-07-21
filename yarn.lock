@@ -2908,6 +2908,10 @@ qs@~6.4.0:
   version "6.4.0"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.4.0.tgz#13e26d28ad6b0ffaa91312cd3bf708ed351e7233"
 
+ramda@~0.21.0:
+  version "0.21.0"
+  resolved "https://registry.yarnpkg.com/ramda/-/ramda-0.21.0.tgz#a001abedb3ff61077d4ff1d577d44de77e8d0a35"
+
 random-bytes@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/random-bytes/-/random-bytes-1.0.0.tgz#4f68a1dc0ae58bd3fb95848c30324db75d64360b"
@@ -2972,6 +2976,16 @@ react-native-drawer-layout@1.2.0:
 react-native-i18n@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/react-native-i18n/-/react-native-i18n-1.0.0.tgz#0c407d9ebb846aae1aa5e05de6503008553f02fd"
+
+react-native-keychain@^2.0.0-rc:
+  version "2.0.0-rc"
+  resolved "https://registry.yarnpkg.com/react-native-keychain/-/react-native-keychain-2.0.0-rc.tgz#2446fc520bc630741e95eb722fe48e44988f4c12"
+
+react-native-material-kit@^0.4.1:
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/react-native-material-kit/-/react-native-material-kit-0.4.1.tgz#bdfc4727e4146980e129ee5bbeb7565db6a918cc"
+  dependencies:
+    ramda "~0.21.0"
 
 react-native-material-textfield@^0.2.4:
   version "0.2.4"

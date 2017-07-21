@@ -3,6 +3,8 @@ package com.nearit.redeem_it;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.github.xinthink.rnmk.ReactMaterialKitPackage;
+import com.oblador.keychain.KeychainPackage;
 import com.i18n.reactnativei18n.ReactNativeI18n;
 import com.react.rnspinkit.RNSpinkitPackage;
 import com.lwansbrough.RCTCamera.RCTCameraPackage;
@@ -26,6 +28,8 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new ReactMaterialKitPackage(),
+            new KeychainPackage(),
             new ReactNativeI18n(),
             new RNSpinkitPackage(),
             new RCTCameraPackage()
