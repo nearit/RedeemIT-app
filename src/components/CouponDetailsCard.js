@@ -59,22 +59,6 @@ const renderCouponStatusSection = ({expired, redeemed, redeemable}) => {
     )
   }
 
-  if (!redeemable) {
-    return (
-      <View>
-        <CardSection>
-          <Image
-            source={require('../assets/coupon-border-lower.png')}
-          />
-        </CardSection>
-
-        <CardSection style={[statusSectionStyle, {backgroundColor: 'white'}]}>
-          <Text style={statusTextStyle}>{I18n.t('coupon_inactive')}</Text>
-        </CardSection>
-      </View>
-    )
-  }
-
   if (expired) {
     return (
       <View>
@@ -86,6 +70,22 @@ const renderCouponStatusSection = ({expired, redeemed, redeemable}) => {
 
         <CardSection style={statusSectionStyle}>
           <Text style={statusTextStyle}>{I18n.t('coupon_expired')}</Text>
+        </CardSection>
+      </View>
+    )
+  }
+
+  if (!redeemable) {
+    return (
+      <View>
+        <CardSection>
+          <Image
+            source={require('../assets/coupon-border-lower.png')}
+          />
+        </CardSection>
+
+        <CardSection style={[statusSectionStyle, {backgroundColor: 'white'}]}>
+          <Text style={statusTextStyle}>{I18n.t('coupon_inactive')}</Text>
         </CardSection>
       </View>
     )
