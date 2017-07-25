@@ -87,7 +87,7 @@ class CouponDetails extends Component {
 
     return (
       <Image
-        source={require('../assets/background.png')}
+        source={require('../assets/background.jpg')}
         style={pageStyle}
       >
 
