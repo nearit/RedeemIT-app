@@ -3,7 +3,9 @@
 	"version": "1.1.0",
 	"private": true,
 	"scripts": {
-		"start": "node node_modules/react-native/local-cli/cli.js start",
+		"start": "react-native start",
+		"android": "react-native run-android",
+		"ios": "react-native run-ios",
 		"test": "jest"
 	},
 	"dependencies": {
@@ -15,10 +17,11 @@
 		"react-native-camera": "^0.6.0",
 		"react-native-communications": "^2.2.1",
 		"react-native-i18n": "^1.0.0",
+		"react-native-iphone-x-helper": "^1.0.2",
 		"react-native-keychain": "^2.0.0-rc",
 		"react-native-material-kit": "^0.4.1",
 		"react-native-material-textfield": "^0.2.4",
-		"react-native-snackbar-component": "^1.0.2",
+		"react-native-snackbar-component": "1.0.2",
 		"react-native-spinkit": "^1.0.2",
 		"react-navigation": "^1.0.0-beta.7",
 		"react-redux": "^5.0.3",
