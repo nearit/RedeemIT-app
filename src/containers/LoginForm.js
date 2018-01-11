@@ -6,11 +6,12 @@ import {
   ImageBackground
 } from 'react-native'
 import { connect } from 'react-redux'
-import { email } from 'react-native-communications'
+import { web } from 'react-native-communications'
 import { MKCheckbox } from 'react-native-material-kit'
 import * as Keychain from 'react-native-keychain'
 import SnackBar from 'react-native-snackbar-component'
 import I18n from 'react-native-i18n'
+import { NRT_PASSWORD_RECOVERY_URL } from 'react-native-dotenv'
 import {
   Card,
   CardSection,
@@ -44,13 +45,7 @@ class LoginForm extends Component {
   }
 
   openPasswordRecoveryPage() {
-    email(
-      ['support@nearit.com'],
-      [],
-      [],
-      'Forgotten NearIT password',
-      "Hello!\n\nDon't worry about forgetting your password, all you have to do is to send this email to us and we'll be happy to get back to you with the new password.\n\nAll the best. The NearIT Team"
-    )
+    web(NRT_PASSWORD_RECOVERY_URL)
   }
 
   _releaseInputFocus() {
