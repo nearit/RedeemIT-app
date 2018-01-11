@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { StatusBar, View, Image, BackAndroid } from 'react-native'
+import { StatusBar, View, ImageBackground, BackAndroid } from 'react-native'
 import I18n from 'react-native-i18n'
 import { connect } from 'react-redux'
 import { couponReset, couponRedeem } from '../actions'
@@ -86,7 +86,7 @@ class CouponDetails extends Component {
     } = styles
 
     return (
-      <Image
+      <ImageBackground
         source={require('../assets/background.jpg')}
         style={pageStyle}
       >
@@ -106,7 +106,7 @@ class CouponDetails extends Component {
         </View>
 
         {this.renderButtons()}
-      </Image>
+      </ImageBackground>
     )
   }
 
