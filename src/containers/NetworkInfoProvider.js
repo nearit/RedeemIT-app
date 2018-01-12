@@ -14,11 +14,11 @@ class NetworkInfoProvider extends Component {
 
     connectionStateChanged()
 
-    NetInfo.isConnected.addEventListener('change', this.handleChange)
+    NetInfo.isConnected.addEventListener('connectionChange', this.handleChange)
   }
 
   componentWillUnmount () {
-    NetInfo.isConnected.removeEventListener('change', this.handleChange)
+    NetInfo.isConnected.removeEventListener('connectionChange', this.handleChange)
   }
 
   handleChange () {

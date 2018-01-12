@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <color name="gray">#444440</color>
+  <color name="darkgray">#CACACA</color>
+  <color name="white">#F2F2F2</color>
+  <color name="brand">#9F92FF</color>
 </resources>

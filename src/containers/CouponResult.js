@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { StatusBar, View, Image, Text, BackAndroid } from 'react-native'
+import { StatusBar, View, Image, ImageBackground, Text, BackAndroid } from 'react-native'
 import I18n from 'react-native-i18n'
 import { connect } from 'react-redux'
 import { BorderView, CardSection, RoundedButton } from '../components/common'
@@ -91,7 +91,7 @@ class CouponResult extends Component {
     const additionalResultContainerStyle = error ? errorResultContainerStyle : successResultContainerStyle
 
     return (
-      <Image
+      <ImageBackground
         source={require('../assets/background.jpg')}
         style={pageStyle}
       >
@@ -117,7 +117,7 @@ class CouponResult extends Component {
             </CardSection>
           </BorderView>
         </View>
-      </Image>
+      </ImageBackground>
     )
   }
 

@@ -1,0 +1,83 @@
+fastlane_version '2.64.1'
+
+before_all do
+  #ensure_git_branch
+  ensure_git_status_clean
+  git_pull
+end
+
+# iOS Lanes
+platform :ios do
+  desc 'Fetch certificates and provisioning profiles'
+  lane :certificates do
+    #match(app_identifier: 'com.nearit.redeem-it', type: 'development', readonly: true)
+    #match(app_identifier: 'com.nearit.redeem-it', type: 'appstore', readonly: true)
+  end
+
+  desc 'Build the iOS application.'
+  private_lane :build do
+    certificates
+
+    increment_build_number(xcodeproj: './ios/redeem_it.xcodeproj')
+    versionNum = get_version_number(xcodeproj: './ios/redeem_it.xcodeproj')
+    buildNum = get_build_number(xcodeproj: './ios/redeem_it.xcodeproj')
+    commit_version_bump(
+      message: "chore(iOS): Version bump to `#{versionNum} (#{buildNum})`",
+      xcodeproj: './ios/redeem_it.xcodeproj'
+    )
+
+    gym(scheme: 'redeem_it', project: './ios/redeem_it.xcodeproj', output_directory: './dist')
+  end
+
+  desc 'Ship to Testflight.'
+  lane :beta do
+    # Archive .ipa
+    build
+
+    # Required to publish using pilot since 'Signiant' proto is broken 
+    # See: https://github.com/fastlane-old/deliver/issues/181#issuecomment-102008715
+    ENV["DELIVER_ITMSTRANSPORTER_ADDITIONAL_UPLOAD_PARAMETERS"] = "-t DAV"
+
+    # Publish to Testflight
+    testflight(skip_waiting_for_build_processing: true)
+  end
+  
+  after_all do |lane|
+    clean_build_artifacts
+
+    push_to_git_remote
+
+    notification(subtitle: "Finished iOS release", message: "Fastlane finished working on iOS lane")
+  end
+end
+
+# Android Lanes
+platform :android do
+  desc 'Build the Android application.'
+  private_lane :build do
+    gradle(task: 'clean', project_dir: 'android/')
+    gradle(task: 'assemble', build_type: 'Release', project_dir: 'android/')
+  end
+
+  desc 'Ship to Playstore Beta.'
+  lane :beta do
+    build
+    git_commit(
+      path: ['./android/gradle.properties'],
+      message: 'chore(Android): Bump VersionCode'
+    )
+
+    supply(
+      package_name: 'com.nearit.redeem_it',
+      json_key: 'android/google_developer_key.json',
+      track: 'beta',
+      track_promote_to: 'beta'
+      )
+
+      push_to_git_remote
+  end
+  
+  after_all do |lane|
+    notification(subtitle: "Finished Android release", message: "Fastlane finished working on Android lane")
+  end
+end

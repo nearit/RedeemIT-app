@@ -1,16 +1,15 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { View, StyleSheet, Text } from 'react-native'
 import I18n from 'react-native-i18n'
+import { ifIphoneX } from 'react-native-iphone-x-helper'
 
 const renderConnectionText = (isConnected, style) => {
   if (!isConnected) {
-    const { BannerStyle, BannerTextStyle } = styles
+    const { Banner, BannerText } = styles
 
     return (
-      <View style={{ ...BannerStyle, ...style }}>
-        <Text style={BannerTextStyle}>
-          {I18n.t('network_connection_missing')}
-        </Text>
+      <View style={[Banner, style]}>
+        <Text style={BannerText}>{I18n.t('network_connection_missing')}</Text>
       </View>
     )
   }
@@ -18,12 +17,12 @@ const renderConnectionText = (isConnected, style) => {
   return <View />
 }
 
-export default NetworkStateBanner = ({ isConnected, style }) => {
+export default (NetworkStateBanner = ({ isConnected, style }) => {
   return renderConnectionText(isConnected, style)
-}
+})
 
-const styles = {
-  BannerStyle: {
+const styles = StyleSheet.create({
+  Banner: {
     position: 'absolute',
     zIndex: 100,
     top: 0,
@@ -34,12 +33,16 @@ const styles = {
     backgroundColor: '#e91832',
     alignItems: 'center',
     justifyContent: 'flex-end',
-    paddingBottom: 14
+    paddingBottom: 14,
+    ...ifIphoneX({
+      height: 85,
+      paddingTop: 17
+    })
   },
-  BannerTextStyle: {
+  BannerText: {
     color: '#FFF',
     fontSize: 16,
     fontFamily: 'Asap',
     fontStyle: 'italic'
   }
-}
+})
