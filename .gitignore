@@ -56,6 +56,7 @@ buck-out/
 .vscode/
 
 # Custom
+fastlane/report.xml
 .tmp
 dist/
 *.jks
