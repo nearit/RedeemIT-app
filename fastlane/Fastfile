@@ -19,7 +19,12 @@ platform :ios do
     certificates
 
     increment_build_number(xcodeproj: './ios/redeem_it.xcodeproj')
-    commit_version_bump(xcodeproj: './ios/redeem_it.xcodeproj')
+    versionNum = get_version_number(xcodeproj: './ios/redeem_it.xcodeproj')
+    buildNum = get_build_number(xcodeproj: './ios/redeem_it.xcodeproj')
+    commit_version_bump(
+      message: "chore(Project): Version bump to '#{versionNum} (#{buildNum})'"
+      xcodeproj: './ios/redeem_it.xcodeproj'
+    )
 
     gym(scheme: 'redeem_it', project: './ios/redeem_it.xcodeproj', output_directory: './dist')
   end
