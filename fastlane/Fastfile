@@ -62,14 +62,19 @@ platform :android do
   desc 'Ship to Playstore Beta.'
   lane :beta do
     build
+    git_commit(
+      path: ['./android/gradle.properties'],
+      message: 'chore(Android): Bump VersionCode'
+    )
+
     supply(
       package_name: 'com.nearit.redeem_it',
       json_key: 'android/google_developer_key.json',
       track: 'beta',
       track_promote_to: 'beta'
-    )
-    # git_commit(path: ['./android/gradle.properties'], message: 'Bump versionCode')
-    # push_to_git_remote
+      )
+
+      push_to_git_remote
   end
   
   after_all do |lane|
