@@ -22,7 +22,7 @@ platform :ios do
     versionNum = get_version_number(xcodeproj: './ios/redeem_it.xcodeproj')
     buildNum = get_build_number(xcodeproj: './ios/redeem_it.xcodeproj')
     commit_version_bump(
-      message: "chore(Project): Version bump to `#{versionNum} (#{buildNum})`",
+      message: "chore(iOS): Version bump to `#{versionNum} (#{buildNum})`",
       xcodeproj: './ios/redeem_it.xcodeproj'
     )
 
