@@ -3625,11 +3625,9 @@ react-native-material-textfield@^0.11.0:
   dependencies:
     prop-types "^15.5.9"
 
-react-native-snackbar-component@cefalo-partha/React-Native-SnackBar-Component:
-  version "1.0.8"
-  resolved "https://codeload.github.com/cefalo-partha/React-Native-SnackBar-Component/tar.gz/87649c4959445d60b7746dc2a102cf74f1f51e91"
-  dependencies:
-    prop-types "^15.6.0"
+react-native-safari-view@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/react-native-safari-view/-/react-native-safari-view-2.1.0.tgz#1e0cd12c62bce79bc1759c7e281646b08b61c959"
 
 react-native-snackbar-component@nearit/React-Native-SnackBar-Component:
   version "1.0.8"

@@ -55,7 +55,7 @@
 	<key>NSCameraUsageDescription</key>
 	<string>RedeemIT richiede la fotocamera per poter scansionare i codici QR</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string/>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Asap-Bold.ttf</string>

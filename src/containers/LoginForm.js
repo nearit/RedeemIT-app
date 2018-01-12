@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import {
+  Linking,
   StatusBar,
   KeyboardAvoidingView,
   Text,
@@ -12,6 +13,7 @@ import * as Keychain from 'react-native-keychain'
 import SnackBar from 'react-native-snackbar-component'
 import I18n from 'react-native-i18n'
 import { NRT_PASSWORD_RECOVERY_URL } from 'react-native-dotenv'
+import SafariView from 'react-native-safari-view'
 import {
   Card,
   CardSection,
@@ -44,8 +46,24 @@ class LoginForm extends Component {
     })
   }
 
+  _dismissSafariView = () => {
+    SafariView.dismiss()
+    Linking.removeEventListener('url', this._dismissSafariView)
+  }
+
   openPasswordRecoveryPage() {
-    web(NRT_PASSWORD_RECOVERY_URL)
+    SafariView.isAvailable()
+      .then(() => {
+        Linking.addEventListener('url', this._dismissSafariView)
+
+        SafariView.show({
+          url: NRT_PASSWORD_RECOVERY_URL,
+          fromBottom: true
+        })
+      })
+      .catch(() => {
+        web(NRT_PASSWORD_RECOVERY_URL)
+      })
   }
 
   _releaseInputFocus() {
