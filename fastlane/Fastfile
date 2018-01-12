@@ -64,7 +64,7 @@ platform :android do
     build
     supply(
       package_name: 'com.nearit.redeem_it',
-      json_key: '../android/google_developer_key.json',
+      json_key: 'android/google_developer_key.json',
       track: 'beta',
       track_promote_to: 'beta'
     )
