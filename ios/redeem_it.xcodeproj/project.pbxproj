@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -47,9 +48,9 @@
 		C7F22D42E0584AF383F21E65 /* Asap-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DD9B166BC84040399DE2AD6A /* Asap-Bold.ttf */; };
 		C82C396D0F044D2599667E90 /* libyoga.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B9D22933422483291089FAD /* libyoga.a */; };
 		D05C596B9A4545ADBFFA68DB /* libcxxreact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AD41C09F73CD4CBF8706A6A5 /* libcxxreact.a */; };
+		D0EF5892F362434387CCEF43 /* libSafariViewManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AE1569000E34B53BAB5A91B /* libSafariViewManager.a */; };
 		D4EB0204F9B744DC813EE08A /* Asap-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 86950B5A13B7426BA21C6A1A /* Asap-Regular.ttf */; };
 		DAA1A738EEBB46288875A58E /* Asap-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CB516B9402DB4644B7D02935 /* Asap-Medium.ttf */; };
-		D0EF5892F362434387CCEF43 /* libSafariViewManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AE1569000E34B53BAB5A91B /* libSafariViewManager.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -122,6 +123,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 2D02E47A1E0B4A5D006451C7;
 			remoteInfo = "redeem_it-tvOS";
+		};
+		3036B8042009019D007367E9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E0FD3B257F4F4DCC9374BE5B /* SafariViewManager.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = SafariViewManager;
 		};
 		3050B2511E9B79E9004420A1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -395,6 +403,7 @@
 		2D02E47B1E0B4A5D006451C7 /* redeem_it-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "redeem_it-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* redeem_it-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "redeem_it-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		34DA8910A308437CB0D96EFE /* Asap-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Asap-BoldItalic.ttf"; path = "../src/assets/fonts/Asap/Asap-BoldItalic.ttf"; sourceTree = "<group>"; };
+		4AE1569000E34B53BAB5A91B /* libSafariViewManager.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libSafariViewManager.a; sourceTree = "<group>"; };
 		5415F12646CA4C46AC15F43C /* libReact.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libReact.a; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		5EA74386DF3D4FF5B081E6F2 /* RNSpinkit.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNSpinkit.xcodeproj; path = "../node_modules/react-native-spinkit/ios/RNSpinkit.xcodeproj"; sourceTree = "<group>"; };
@@ -410,11 +419,10 @@
 		C1686CC0E8764FAB866334A8 /* RNI18n.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNI18n.xcodeproj; path = "../node_modules/react-native-i18n/RNI18n.xcodeproj"; sourceTree = "<group>"; };
 		CB516B9402DB4644B7D02935 /* Asap-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Asap-Medium.ttf"; path = "../src/assets/fonts/Asap/Asap-Medium.ttf"; sourceTree = "<group>"; };
 		DD9B166BC84040399DE2AD6A /* Asap-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Asap-Bold.ttf"; path = "../src/assets/fonts/Asap/Asap-Bold.ttf"; sourceTree = "<group>"; };
+		E0FD3B257F4F4DCC9374BE5B /* SafariViewManager.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = SafariViewManager.xcodeproj; path = "../node_modules/react-native-safari-view/SafariViewManager.xcodeproj"; sourceTree = "<group>"; };
 		EB2F2DB9333E4CB0A2F0A300 /* Asap-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Asap-Italic.ttf"; path = "../src/assets/fonts/Asap/Asap-Italic.ttf"; sourceTree = "<group>"; };
 		F07626DDAEDF4B84BC5551C3 /* RNKeychain.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNKeychain.xcodeproj; path = "../node_modules/react-native-keychain/RNKeychain.xcodeproj"; sourceTree = "<group>"; };
 		F7C630F70EFA44A6BBAC04E3 /* Asap-MediumItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Asap-MediumItalic.ttf"; path = "../src/assets/fonts/Asap/Asap-MediumItalic.ttf"; sourceTree = "<group>"; };
-		E0FD3B257F4F4DCC9374BE5B /* SafariViewManager.xcodeproj */ = {isa = PBXFileReference; name = "SafariViewManager.xcodeproj"; path = "../node_modules/react-native-safari-view/SafariViewManager.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
-		4AE1569000E34B53BAB5A91B /* libSafariViewManager.a */ = {isa = PBXFileReference; name = "libSafariViewManager.a"; path = "libSafariViewManager.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -593,6 +601,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		3036B8012009019D007367E9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3036B8052009019D007367E9 /* libSafariViewManager.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		3050B2331E9B79E9004420A1 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -647,6 +663,7 @@
 				697448F51C4B4E95BB3C5B0D /* libjschelpers.a */,
 				111D4E885F2D456FAD81D491 /* libRNKeychain.a */,
 				0BA35AB32B944CBB9DA55CB2 /* libRCTMaterialKit.a */,
+				4AE1569000E34B53BAB5A91B /* libSafariViewManager.a */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -919,6 +936,10 @@
 					ProductGroup = 30AE8CFD1E92E32F005D24D3 /* Products */;
 					ProjectRef = 5EA74386DF3D4FF5B081E6F2 /* RNSpinkit.xcodeproj */;
 				},
+				{
+					ProductGroup = 3036B8012009019D007367E9 /* Products */;
+					ProjectRef = E0FD3B257F4F4DCC9374BE5B /* SafariViewManager.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -985,6 +1006,13 @@
 			fileType = archive.ar;
 			path = libReact.a;
 			remoteRef = 146834031AC3E56700842450 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		3036B8052009019D007367E9 /* libSafariViewManager.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libSafariViewManager.a;
+			remoteRef = 3036B8042009019D007367E9 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		3050B2521E9B79E9004420A1 /* libRNI18n.a */ = {
@@ -1694,7 +1722,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1729,7 +1757,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
