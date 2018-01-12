@@ -57,6 +57,8 @@ class LoginForm extends Component {
 
         SafariView.show({
           url: NRT_PASSWORD_RECOVERY_URL,
+          tintColor: '#F2F2F2',
+          barTintColor: '#9F92FF',
           fromBottom: true
         })
       })
