@@ -1,46 +1,52 @@
 import React, { Component } from 'react'
-import { StatusBar, View, Image, BackAndroid } from 'react-native'
+import {
+  BackAndroid,
+  ImageBackground,
+  StatusBar,
+  StyleSheet,
+  View
+} from 'react-native'
 import I18n from 'react-native-i18n'
 import { connect } from 'react-redux'
+import { ifIphoneX } from 'react-native-iphone-x-helper'
 import { couponReset, couponRedeem } from '../actions'
 import { FooterBar, IconButton } from '../components/common'
 import CouponDetailsCard from '../components/CouponDetailsCard'
 import NetworkStateBanner from '../components/NetworkStateBanner'
 
 class CouponDetails extends Component {
-
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.handleBack = this.handleBack.bind(this)
   }
 
-  onRedeemButtonPressed () {
+  onRedeemButtonPressed() {
     const { serialCode, couponRedeem } = this.props
 
     couponRedeem(serialCode)
   }
 
-  onCancelButtonPressed () {
+  onCancelButtonPressed() {
     const { couponReset } = this.props
 
     couponReset()
   }
 
-  componentDidMount () {
+  componentDidMount() {
     BackAndroid.addEventListener('hardwareBackPress', this.handleBack)
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     //Forgetting to remove the listener will cause pop executes multiple times
     BackAndroid.removeEventListener('hardwareBackPress', this.handleBack)
   }
 
-  handleBack () {
+  handleBack() {
     this.onCancelButtonPressed()
     return true
   }
 
-  renderButtons () {
+  renderButtons() {
     const { couponDetails, isConnected } = this.props
 
     if (!couponDetails.redeemable) {
@@ -61,7 +67,12 @@ class CouponDetails extends Component {
           onPress={this.onRedeemButtonPressed.bind(this)}
           disabled={!isConnected}
           label={I18n.t('apply_coupon')}
-          style={{ backgroundColor: '#68c600' }}
+          style={{
+            backgroundColor: '#68c600',
+            ...ifIphoneX({
+              paddingBottom: 22
+            })
+          }}
           labelStyle={{ fontFamily: 'Asap-Bold', color: 'white' }}
         />
 
@@ -75,25 +86,20 @@ class CouponDetails extends Component {
     )
   }
 
-  render () {
-    const {
-      couponDetails,
-      isConnected
-    } = this.props
-    const {
-      pageStyle,
-      overlayStyle
-    } = styles
+  render() {
+    const { couponDetails, isConnected } = this.props
+    const { pageStyle, overlayStyle } = styles
 
     return (
-      <Image
+      <ImageBackground
         source={require('../assets/background.jpg')}
         style={pageStyle}
       >
-
-        <StatusBar barStyle='light-content'
-                   translucent={true}
-                   backgroundColor={'rgba(0, 0, 0, 0.1)'} />
+        <StatusBar
+          barStyle="light-content"
+          translucent={true}
+          backgroundColor={'rgba(0, 0, 0, 0.1)'}
+        />
 
         <NetworkStateBanner isConnected={isConnected} />
 
@@ -106,13 +112,12 @@ class CouponDetails extends Component {
         </View>
 
         {this.renderButtons()}
-      </Image>
+      </ImageBackground>
     )
   }
-
 }
 
-const styles = {
+const styles = StyleSheet.create({
   pageStyle: {
     flex: 1,
     width: undefined,
@@ -123,41 +128,17 @@ const styles = {
     flexDirection: 'column',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    paddingTop: 40,
-    backgroundColor: '#000D'
-  },
-  baseResultContainerStyle: {
-    alignSelf: 'center',
-    width: 300,
-    height: 300,
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingTop: 50,
-    paddingBottom: 20
-  },
-  errorResultContainerStyle: {
-    borderColor: '#e91832'
-  },
-  successResultContainerStyle: {
-    borderColor: '#68c600'
-  },
-  resultTextStyle: {
-    color: 'white',
-    fontFamily: 'Asap-Bold',
-    fontSize: 20,
-    textAlign: 'center'
-  },
-  actionButtonStyle: {
-    height: 50,
-    marginLeft: 25,
-    marginRight: 25,
-    backgroundColor: 'white'
-  },
-  actionButtonLabelStyle: {
-    color: 'black'
+    backgroundColor: '#000D',
+    ...ifIphoneX(
+      {
+        paddingTop: 62
+      },
+      {
+        paddingTop: 40
+      }
+    )
   }
-}
+})
 
 const mapStateToProps = ({ coupon, connection }) => {
   const { error, serialCode, couponDetails, redeemStatus } = coupon

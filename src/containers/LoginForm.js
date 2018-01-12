@@ -1,11 +1,18 @@
 import React, { Component } from 'react'
-import { StatusBar, KeyboardAvoidingView, Text, Image } from 'react-native'
+import {
+  Linking,
+  StatusBar,
+  KeyboardAvoidingView,
+  Text,
+  ImageBackground
+} from 'react-native'
 import { connect } from 'react-redux'
-import { email } from 'react-native-communications'
-import { MKCheckbox } from 'react-native-material-kit'
+import { MKCheckbox } from 'react-native-material-kit'
 import * as Keychain from 'react-native-keychain'
 import SnackBar from 'react-native-snackbar-component'
 import I18n from 'react-native-i18n'
+import { NRT_PASSWORD_RECOVERY_URL } from 'react-native-dotenv'
+import SafariView from 'react-native-safari-view'
 import {
   Card,
   CardSection,
@@ -17,52 +24,70 @@ import NetworkStateBanner from '../components/NetworkStateBanner'
 import { emailChanged, passwordChanged, loginUser } from '../actions/index'
 
 class LoginForm extends Component {
-
-  constructor (props) {
-    super(props);
+  constructor(props) {
+    super(props)
     this.state = { storeCredentials: false }
   }
 
-  componentDidMount () {
-    Keychain.getGenericPassword()
-    .then(({ username: email, password }) => {
+  componentDidMount() {
+    Keychain.getGenericPassword().then(({ username: email, password }) => {
       let storeCredentials = false
       if (email && password) {
         const { emailChanged, passwordChanged } = this.props
-        
+
         storeCredentials = true
 
         emailChanged(email)
         passwordChanged(password)
       }
-      
+
       this.setState({ storeCredentials })
     })
   }
 
-  openPasswordRecoveryPage () {
-    email(['support@nearit.com'], [], [], 'Forgotten NearIT password', 'Hello!\n\nDon\'t worry about forgetting your password, all you have to do is to send this email to us and we\'ll be happy to get back to you with the new password.\n\nAll the best. The NearIT Team')
+  _dismissSafariView = () => {
+    SafariView.dismiss()
+    Linking.removeEventListener('url', this._dismissSafariView)
   }
 
-  _releaseInputFocus () {
+  openPasswordRecoveryPage() {
+    SafariView.isAvailable()
+      .then(() => {
+        Linking.addEventListener('url', this._dismissSafariView)
+
+        SafariView.show({
+          url: NRT_PASSWORD_RECOVERY_URL,
+          tintColor: '#F2F2F2',
+          barTintColor: '#9F92FF',
+          fromBottom: true
+        })
+      })
+      .catch(() => {
+        Linking.openURL(NRT_PASSWORD_RECOVERY_URL).catch(err => {
+          // Could not open Password Recovery URL
+        })
+      })
+  }
+
+  _releaseInputFocus() {
     // Release focus from fields
     this.emailField.blur()
     this.passwordField.blur()
   }
 
-  onStoreChecked () {
+  onStoreChecked() {
     this._releaseInputFocus()
-    
+
     const { storeCredentials } = this.state
     this.setState({ storeCredentials: !storeCredentials })
   }
 
-  onLoginPress () {
+  onLoginPress() {
     this._releaseInputFocus()
-    
+
     const { email, password } = this.props
     const { storeCredentials } = this.state
-  
+
     if (storeCredentials) {
       // Store credentials inside Keychain
       Keychain.setGenericPassword(email, password)
@@ -74,7 +99,7 @@ class LoginForm extends Component {
     this.props.loginUser({ email, password })
   }
 
-  render () {
+  render() {
     const {
       pageStyle,
       loginFormStyle,
@@ -87,56 +112,49 @@ class LoginForm extends Component {
       buttonTextStyle
     } = styles
 
-    const {
-      storeCredentials
-    } = this.state
+    const { storeCredentials } = this.state
 
-    const {
-      email,
-      password,
-      error,
-      loading,
-      isConnected
-    } = this.props
+    const { email, password, error, loading, isConnected } = this.props
 
     return (
-      <Image
+      <ImageBackground
         source={require('../assets/background.jpg')}
-        style={pageStyle}>
-
-        <StatusBar barStyle='light-content'
-                   translucent={true}
-                   backgroundColor={'rgba(0, 0, 0, 0.1)'} />
+        style={pageStyle}
+      >
+        <StatusBar
+          barStyle="light-content"
+          translucent={true}
+          backgroundColor={'rgba(0, 0, 0, 0.1)'}
+        />
 
         <NetworkStateBanner isConnected={isConnected} />
 
         <Card style={loginFormStyle}>
-
-          <KeyboardAvoidingView behavior='padding'>
+          <KeyboardAvoidingView behavior="padding">
             <CardSection>
               <MaterialInput
-                internalRef={(input) => {
+                internalRef={input => {
                   if (input != null) {
                     this.emailField = input
                   }
                 }}
-                label='EMAIL'
+                label="EMAIL"
                 value={email}
                 onChangeText={this.props.emailChanged}
                 autoCorrect={false}
-                keyboardType='email-address'
-                autoCapitalize='none'
+                keyboardType="email-address"
+                autoCapitalize="none"
               />
             </CardSection>
 
             <CardSection>
               <MaterialInput
-                internalRef={(input) => {
+                internalRef={input => {
                   if (input != null) {
                     this.passwordField = input
                   }
                 }}
-                label='PASSWORD'
+                label="PASSWORD"
                 value={password}
                 onChangeText={this.props.passwordChanged}
                 secureTextEntry
@@ -159,7 +177,7 @@ class LoginForm extends Component {
               onCheckedChange={() => this.onStoreChecked()}
               style={checkboxStyle}
             />
-            <Text 
+            <Text
               onPress={() => this.onStoreChecked()}
               style={checkboxTextStyle}
             >
@@ -179,14 +197,14 @@ class LoginForm extends Component {
           </CardSection>
         </Card>
 
-        <SnackBar visible={error}
-                  textMessage={error !== null ? I18n.t(error) : ''}
-                  backgroundColor="#E91832" />
-
-      </Image>
+        <SnackBar
+          visible={error}
+          textMessage={error !== null ? I18n.t(error) : ''}
+          backgroundColor="#E91832"
+        />
+      </ImageBackground>
     )
   }
-
 }
 
 const styles = {
@@ -220,8 +238,7 @@ const styles = {
     justifyContent: 'flex-start',
     alignItems: 'center'
   },
-  checkboxStyle: {
-  },
+  checkboxStyle: {},
   checkboxTextStyle: {
     fontFamily: 'Asap-Italic',
     color: '#777',
