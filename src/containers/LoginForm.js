@@ -7,7 +7,6 @@ import {
   ImageBackground
 } from 'react-native'
 import { connect } from 'react-redux'
-import { web } from 'react-native-communications'
 import { MKCheckbox } from 'react-native-material-kit'
 import * as Keychain from 'react-native-keychain'
 import SnackBar from 'react-native-snackbar-component'
@@ -62,7 +61,9 @@ class LoginForm extends Component {
         })
       })
       .catch(() => {
-        web(NRT_PASSWORD_RECOVERY_URL)
+        Linking.openURL(NRT_PASSWORD_RECOVERY_URL).catch(err => {
+          // Could not open Password Recovery URL
+        })
       })
   }
 
