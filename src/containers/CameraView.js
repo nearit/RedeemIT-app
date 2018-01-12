@@ -9,41 +9,48 @@ import {
   CardSection,
   FooterBar,
   IconButton,
-  Spacer
+  Spacer,
+  ConfirmDialog
 } from '../components/common'
 import NetworkStateBanner from '../components/NetworkStateBanner'
 import CheckedCameraView from '../components/CheckedCameraView'
 import { logoutUser, couponDetected } from '../actions/index'
 
 class CameraView extends Component {
+  state = {
+    confirmLogout: false
+  }
 
-  onLogoutPress () {
+  onLogoutPress = () => {
+    this.setState({ confirmLogout: true })
+  }
+
+  onConfirmLogout = () => {
     this.props.logoutUser()
   }
 
-  onBarCodeRead ({ data }) {
+  onCancelLogout = () => {
+    this.setState({ confirmLogout: false })
+  }
+
+  onBarCodeRead({ data }) {
+    const { confirmLogout } = this.state
     const { serialCode, isConnected, couponDetected } = this.props
 
-    if (!serialCode && isConnected) {
+    if (!confirmLogout && !serialCode && isConnected) {
       couponDetected(data)
     }
   }
 
-  renderLoader () {
+  renderLoader() {
     const { loading } = this.props
 
     if (loading) {
-      return (
-        <Spinner
-          type='Pulse'
-          color='#9f92ff'
-          size={150}
-        />
-      )
+      return <Spinner type="Pulse" color="#9f92ff" size={150} />
     }
   }
 
-  render () {
+  render() {
     const {
       PageStyle,
       CameraStyle,
@@ -54,21 +61,32 @@ class CameraView extends Component {
       LogoutButtonLabelStyle
     } = styles
 
+    const { confirmLogout } = this.state
     const { isConnected } = this.props
 
     return (
       <View style={PageStyle}>
-        <StatusBar barStyle='light-content'
-                   translucent={true}
-                   backgroundColor={'rgba(0, 0, 0, 0.1)'} />
+        <StatusBar
+          barStyle="light-content"
+          translucent={true}
+          backgroundColor={'rgba(0, 0, 0, 0.1)'}
+        />
 
         <NetworkStateBanner isConnected={isConnected} />
+
+        <ConfirmDialog
+          opened={confirmLogout}
+          onConfirm={this.onConfirmLogout}
+          onCancel={this.onCancelLogout}
+          title={I18n.t('logout')}
+          question={I18n.t('ask_logout_confirmation')}
+        />
 
         <CheckedCameraView
           style={CameraStyle}
           aspect={Camera.constants.Aspect.fill}
-          onBarCodeRead={(event) => this.onBarCodeRead(event)}>
-
+          onBarCodeRead={event => this.onBarCodeRead(event)}
+        >
           <CardSection style={HintContainerStyle}>
             <Text style={HintStyle}>{I18n.t('qr_code_hint')}</Text>
           </CardSection>
@@ -80,7 +98,6 @@ class CameraView extends Component {
           </CardSection>
 
           <Spacer />
-
         </CheckedCameraView>
 
         <FooterBar>
@@ -94,7 +111,6 @@ class CameraView extends Component {
       </View>
     )
   }
-
 }
 
 const styles = {
