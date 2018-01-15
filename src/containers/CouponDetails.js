@@ -68,10 +68,7 @@ class CouponDetails extends Component {
           disabled={!isConnected}
           label={I18n.t('apply_coupon')}
           style={{
-            backgroundColor: '#68c600',
-            ...ifIphoneX({
-              paddingBottom: 22
-            })
+            backgroundColor: '#68c600'
           }}
           labelStyle={{ fontFamily: 'Asap-Bold', color: 'white' }}
         />
