@@ -58,6 +58,7 @@ buck-out/
 # Custom
 .tmp
 *.jks
+release.keystore.properties
 android/google_developer_key.json
 dist/
 fastlane/report.xml

@@ -95,25 +95,6 @@ def enableSeparateBuildPerCPUArchitecture = false
  */
 def enableProguardInReleaseBuilds = false
 
-/**
- * Retrieve password from macOS keychain
- * @param currentUser
- * @param keyChain
- * @return
- */
-def getPassword(String currentUser, String keyChain) {
-    def stdout = new ByteArrayOutputStream()
-    def stderr = new ByteArrayOutputStream()
-    exec {
-        commandLine 'security', '-q', 'find-generic-password', '-a', currentUser, '-s', keyChain, '-w'
-        standardOutput = stdout
-        errorOutput = stderr
-        ignoreExitValue true
-    }
-    //noinspection GroovyAssignabilityCheck
-    stdout.toString().trim()
-}
-
 android {
     compileSdkVersion 27
     buildToolsVersion "27.0.3"
@@ -128,6 +109,12 @@ android {
             abiFilters "armeabi-v7a", "x86"
         }
     }
+
+    signingConfigs {
+        release {
+        }
+    }
+
     splits {
         abi {
             reset()
@@ -136,16 +123,7 @@ android {
             include "armeabi-v7a", "x86"
         }
     }
-    signingConfigs {
-        release {
-            if (project.hasProperty('MYAPP_RELEASE_STORE_FILE')) {
-                storeFile file(MYAPP_RELEASE_STORE_FILE)
-                storePassword getPassword("mattia.panzeri", "android_keystore")
-                keyAlias MYAPP_RELEASE_KEY_ALIAS
-                keyPassword getPassword("mattia.panzeri", "android_key")
-            }
-        }
-    }
+
     buildTypes {
         release {
             minifyEnabled enableProguardInReleaseBuilds
@@ -185,3 +163,11 @@ task copyDownloadableDepsToLibs(type: Copy) {
     from configurations.compile
     into 'libs'
 }
+
+// Load signing properties
+def signProps = new Properties()
+signProps.load(new FileInputStream(rootProject.file("keystores/release.keystore.properties")))
+android.signingConfigs.release.storeFile rootProject.file(signProps.keyStore)
+android.signingConfigs.release.storePassword signProps.keyStorePassword
+android.signingConfigs.release.keyAlias signProps.keyAlias
+android.signingConfigs.release.keyPassword signProps.keyAliasPassword

@@ -111,7 +111,11 @@ Setup is done automatically when running the `publish:ios:beta` command.
 
 To prepare to deploy the Android app you'll need to:
 
-* Place the `near.jks` keystore under the `android/app` folder
+* Setup your signing configuration inside the `android/keystores` folder:
+
+  * Rename `release.keystore.properties.sample` file to `release.keystore.properties`
+  * Update `release.keystore.properties` configuration to match your signing reqs (keystore location, key alias, passwords)
+
 * Setup a `Google Service Account` by following the Fastlane supply guide [here](https://docs.fastlane.tools/getting-started/android/setup/#setting-up-supply) and saving the downloaded credentials file as `google_developer_key.json` under the `android` folder.
 
 Then simply run the `publish:android:beta` command.
